@@ -22,5 +22,9 @@ namespace TheRig.Data.Repositories
         {
             return _items.Where(x => x.TypeId == motherboard.RamTypeId).ToList();
         }
+        public IEnumerable<Ram> Find()
+        {
+            return _items;
+        }
     }
 }

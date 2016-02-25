@@ -7,5 +7,6 @@ namespace TheRig.Core.Interfaces.Repositories
     {
         Ram GetItem(int id);
         IEnumerable<Ram> GetCompatible(Motherboard motherboard);
+        IEnumerable<Ram> Find();
     }
 }

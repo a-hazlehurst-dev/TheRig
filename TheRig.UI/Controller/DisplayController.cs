@@ -6,101 +6,121 @@ using TheRig.Models.Components;
 
 namespace TheRig.UI.Controller
 {
-    public class Display
+    public class DisplayController
     {
         private GameManager _gameManager;
-        public Display(GameManager gameManager)
+        private Item _selectedItem;
+
+        public DisplayController(GameManager gameManager)
         {
             _gameManager = gameManager;
-        }
-
-        public void Quit()
-        {
-
-        }
-
-        public void DisplayCompatibleItems(Motherboard motherboard)
-        {
-            var motherboardBuilder = new MotherboardBuilder(_gameManager.UnitOfWork);
-            var compatible = motherboardBuilder.GetCompatibleItems(motherboard);
-
-
-            Console.Clear();
-            var list = 1;
-            foreach (var item in compatible)
+            bool quit = false;
+            do
             {
-                Console.WriteLine(list + ". " + item.Name);
-                list++;
+                Console.Clear();
+                Title();
+                quit = MainMenu();
+            } while (quit);
+
+        }
+
+        public void Title()
+        {
+            Console.WriteLine("Welcome to the Rig, Written by Adam Hazlehurst");
+        }
+
+        public void DisplayAllComponents()
+        {
+            ComponentListModel componentListModel = new ComponentListModel(_gameManager);
+            string display="";
+            Console.WriteLine("This is a list of all available components. Please type a number to select on");
+            foreach(var item in componentListModel.Items)
+            {
+                display += item.Key + ", " + item.Value.Name + Environment.NewLine;
             }
-            Console.WriteLine("Enter the number of the item you wish to install, 0 to view the pc, or x to exit: ");
-            var key = Console.ReadLine();
-            if (key.Equals("x") || key.Equals("X"))
+            Console.Write(display);
+
+            string selectedValue = Console.ReadLine();
+            int val = -1;
+            if (!int.TryParse(selectedValue, out val))
+            {
+                _selectedItem = null;
                 return;
-            else
-            {
-                ProcessInput(key, motherboard, list, compatible);
             }
+                
+            _selectedItem = componentListModel.Items[val];
+
         }
 
-        public void ProcessInput(string key, Motherboard motherboard, int list, List<Item> compatible)
+        public bool MainMenu()
         {
-            int val = 0;
-            int.TryParse(key, out val);
-            if (val == 0)
+            Console.WriteLine("Main Menu, please select from the list.");
+            if (_selectedItem != null)
             {
-                DisplayInstalledItems(motherboard);
-                DisplayCompatibleItems(motherboard);
+                Console.WriteLine("Current Selected item is: " + _selectedItem.Name);
+                Console.WriteLine("Press 'v' for more information ");
+
             }
-            else if (val > 0 && val < list)
+            Console.WriteLine("A: Displays All items.");
+            string selected = Console.ReadLine();
+            if (selected.Equals("A"))
             {
-                motherboard.Components.Add(compatible[val - 1]);
-                DisplayCompatibleItems(motherboard);
+                DisplayAllComponents();
             }
+            if (selected.Equals("Q"))
+            {
+                return false;
+            }
+            if (selected.Equals("V"))
+            {
+                DisplayItem();
+            }
+            return true;
+
         }
 
-        public void DisplayInstalledItems(Motherboard motherboard)
+        public  void DisplayItem()
         {
-            Console.Clear();
-            Console.WriteLine("Installed Items");
-            int speed = 0;
-            decimal cost = 0.0m;
-            string names = "";
-            foreach (var component in motherboard.Components)
+            if (_selectedItem != null)
             {
-
-                if (component.Type == "Ram")
-                {
-                    var obj = ((Ram)component);
-                    speed += obj.Speed;
-                    cost += obj.Price;
-                    names += Environment.NewLine + obj.Name;
-                }
-                if (component.Type == "Cpu")
-                {
-                    var obj = ((Cpu)component);
-                    speed += obj.Speed;
-                    cost += obj.Price;
-                    names += Environment.NewLine + obj.Name;
-                }
-                if (component.Type == "Graphic")
-                {
-                    var obj = ((Graphic)component);
-                    speed += obj.Speed;
-                    cost += obj.Price;
-                    names += Environment.NewLine + obj.Name;
-                }
-                if (component.Type == "Sound")
-                {
-                    var obj = ((Sound)component);
-                    cost += obj.Price;
-                    names += Environment.NewLine + obj.Name;
-                }
-
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine("Name: " + _selectedItem.Name + ", £" + _selectedItem.Price);
+                Console.ReadKey();
             }
-            Console.WriteLine("Speed: " + speed + ". Cost: " + cost);
-            Console.WriteLine(names);
-            Console.ReadKey();
         }
+
+    }
+
+    
+
+    public class ComponentListModel
+    {
+        private readonly GameManager _gameManager;
+        public Dictionary<int, Item> Items { get; set; }
+        
+        public ComponentListModel(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+            Items = new Dictionary<int, Item>();
+            Build();
+        }
+
+        private void Build()
+        {
+            var items = new List<Item>();
+            items.AddRange(_gameManager.UnitOfWork.CpuRepository.Find());
+            items.AddRange(_gameManager.UnitOfWork.GraphicsRepository.Find());
+            items.AddRange(_gameManager.UnitOfWork.MotherboardRepository.Find());
+            items.AddRange(_gameManager.UnitOfWork.RamRepository.Find());
+            items.AddRange(_gameManager.UnitOfWork.SoundRepository.Find());
+            int count = 1;
+            foreach(var item  in items)
+            {
+                Items.Add(count, item);
+                count++;
+            }
+        }
+
 
     }
 }

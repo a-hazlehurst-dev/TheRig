@@ -13,11 +13,7 @@ namespace ConsoleApplication1
             var dp = new DataProvider();
             var unitOfWork = new UnitOfWork(dp);
             var gameManager = new GameManager(unitOfWork);
-
-            var display = new Display(gameManager);
-            var motherboard = gameManager.GetMotherboard(1);
-            var test = "sdlkg";
-            display.DisplayCompatibleItems(motherboard);
+            var displayController = new DisplayController(gameManager);
         }
     }
 
