@@ -120,11 +120,8 @@ namespace TheRig.UI.Controller
         private void Build()
         {
             var items = new List<Item>();
-            items.AddRange(_gameManager.UnitOfWork.CpuRepository.Find());
-            items.AddRange(_gameManager.UnitOfWork.GraphicsRepository.Find());
-            items.AddRange(_gameManager.UnitOfWork.MotherboardRepository.Find());
-            items.AddRange(_gameManager.UnitOfWork.RamRepository.Find());
-            items.AddRange(_gameManager.UnitOfWork.SoundRepository.Find());
+            items.AddRange(_gameManager.UnitOfWork.GetAll());
+
             int count = 1;
             foreach(var item  in items)
             {

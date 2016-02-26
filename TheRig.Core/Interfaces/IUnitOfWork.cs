@@ -1,4 +1,6 @@
-﻿using TheRig.Core.Interfaces.Repositories;
+﻿using System.Collections.Generic;
+using TheRig.Core.Interfaces.Repositories;
+using TheRig.Models.Components;
 
 namespace TheRig.Core.Interfaces
 {
@@ -9,5 +11,8 @@ namespace TheRig.Core.Interfaces
         IRamRepository RamRepository { get; }
         ISoundRepository SoundRepository { get;  }
         IGraphicRepository GraphicsRepository { get; }
+
+        List<Item> GetAll();
+        List<Item> GetCompatibleItems(Motherboard motherboard);
     }
 }

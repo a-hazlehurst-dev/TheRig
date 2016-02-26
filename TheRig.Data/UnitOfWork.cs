@@ -1,6 +1,9 @@
-﻿using TheRig.Core.Interfaces;
+﻿using System.CodeDom;
+using System.Collections.Generic;
+using TheRig.Core.Interfaces;
 using TheRig.Core.Interfaces.Repositories;
 using TheRig.Data.Repositories;
+using TheRig.Models.Components;
 
 namespace TheRig.Data
 {
@@ -20,7 +23,27 @@ namespace TheRig.Data
             GraphicsRepository = new GraphicRepository(dataProvider.GetGraphics());
             SoundRepository = new SoundRepository(dataProvider.GetSounds()); 
             MotherboardRepository = new MotherboardRepository(dataProvider.GetMotherboards());
+        }
 
+        public List<Item> GetAll()
+        {
+            List<Item> items = new List<Item>();
+            items.AddRange(RamRepository.Find());
+            items.AddRange(CpuRepository.Find());
+            items.AddRange(GraphicsRepository.Find());
+            items.AddRange(SoundRepository.Find());
+            items.AddRange(MotherboardRepository.Find());
+            return items;
+        }
+
+        public List<Item> GetCompatibleItems(Motherboard motherboard)
+        {
+            List<Item> items = new List<Item>();
+            items.AddRange(RamRepository.GetCompatible(motherboard));
+            items.AddRange(CpuRepository.GetCompatible(motherboard));
+            items.AddRange(GraphicsRepository.GetCompatible(motherboard));
+            items.AddRange(SoundRepository.GetCompatible(motherboard));
+            return items;
         }
 
 
