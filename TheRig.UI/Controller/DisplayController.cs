@@ -10,10 +10,11 @@ namespace TheRig.UI.Controller
     {
         private GameManager _gameManager;
         private Item _selectedItem;
-
+        private Computer _pc;
         public DisplayController(GameManager gameManager)
         {
             _gameManager = gameManager;
+            _pc = new Computer();
             bool quit = false;
             do
             {
@@ -27,14 +28,16 @@ namespace TheRig.UI.Controller
         public void Title()
         {
             Console.WriteLine("Welcome to the Rig, Written by Adam Hazlehurst");
+            Console.WriteLine("==================================================");
         }
 
         public void DisplayAllComponents()
         {
-            ComponentListModel componentListModel = new ComponentListModel(_gameManager);
+            ComponentListViewModel componentListModel = new ComponentListViewModel(_gameManager);
             string display="";
             Console.WriteLine("This is a list of all available components. Please type a number to select on");
-            foreach(var item in componentListModel.Items)
+
+            foreach (var item in componentListModel.Items)
             {
                 display += item.Key + ", " + item.Value.Name + Environment.NewLine;
             }
@@ -57,26 +60,35 @@ namespace TheRig.UI.Controller
             Console.WriteLine("Main Menu, please select from the list.");
             if (_selectedItem != null)
             {
-                Console.WriteLine("Current Selected item is: " + _selectedItem.Name);
-                Console.WriteLine("Press 'v' for more information ");
-
+                DisplayItem();
             }
             Console.WriteLine("A: Displays All items.");
+            if (_selectedItem != null)
+            {
+                Console.WriteLine("B: Add '"+_selectedItem.Name+"' to to PC.");
+            }
+
+
             string selected = Console.ReadLine();
             if (selected.Equals("A"))
             {
                 DisplayAllComponents();
             }
+            if (selected.Equals("B"))
+            {
+                AddItemToBuild();
+            }
             if (selected.Equals("Q"))
             {
                 return false;
             }
-            if (selected.Equals("V"))
-            {
-                DisplayItem();
-            }
             return true;
 
+        }
+
+        public void AddItemToBuild()
+        {
+            
         }
 
         public  void DisplayItem()
@@ -84,7 +96,7 @@ namespace TheRig.UI.Controller
             if (_selectedItem != null)
             {
                 Console.WriteLine("--------------------------------------------------------");
-                Console.WriteLine("Name: " + _selectedItem.Name + ", £" + _selectedItem.Price);
+                Console.WriteLine("Selected Component { Name: " + _selectedItem.Name + ", £" + _selectedItem.Price + "}");
                 Console.ReadKey();
             }
         }
@@ -93,12 +105,12 @@ namespace TheRig.UI.Controller
 
     
 
-    public class ComponentListModel
+    public class ComponentListViewModel
     {
         private readonly GameManager _gameManager;
         public Dictionary<int, Item> Items { get; set; }
         
-        public ComponentListModel(GameManager gameManager)
+        public ComponentListViewModel(GameManager gameManager)
         {
             _gameManager = gameManager;
             Items = new Dictionary<int, Item>();
