@@ -1,7 +1,6 @@
 ﻿using TheRig.Core;
 using TheRig.Data;
 using TheRig.Data.Providers;
-using TheRig.Data.Repositories;
 using TheRig.UI.Controller;
 
 namespace ConsoleApplication1
@@ -12,41 +11,12 @@ namespace ConsoleApplication1
         {
             var dp = new DataProvider();
             var unitOfWork = new UnitOfWork(dp);
-            var gameManager = new GameManager(unitOfWork);
-            var displayController = new DisplayController(gameManager);
+            var displayController = new DisplayController(unitOfWork);
+            displayController.Start();
+
+            
         }
     }
-
- 
-
-    
-
-    
-
-
-
-    
-    
-
-    
-
-   
-
-
-
-    
-
-  
-
-   
-
- 
-
-   
-
-    
-
-   
 
     public class TileGrid
     {

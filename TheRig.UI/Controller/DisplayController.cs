@@ -1,135 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TheRig.Core;
 using TheRig.Core.Builders;
+using TheRig.Core.Interfaces;
 using TheRig.Models.Components;
 
 namespace TheRig.UI.Controller
 {
     public class DisplayController
     {
-        private GameManager _gameManager;
-        private Item _selectedItem;
-        private Computer _pc;
-        public DisplayController(GameManager gameManager)
+        private bool _endGame;
+        public IUnitOfWork UnitOfWork { get; private set; }
+        public GamePages GamePages { get; set; }
+        public bool EndGame
         {
-            _gameManager = gameManager;
-            _pc = new Computer();
-            bool quit = false;
+            set
+            {
+                Console.WriteLine("Are you sure you wish to quit? press 'Y' to quit");
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Y)
+                {
+                    _endGame = true;
+                    End();
+                }
+            }
+        }
+
+        public DisplayController(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
+            GamePages= new GamePages(this);
+        }
+
+        public void Start()
+        {
             do
             {
                 Console.Clear();
-                Title();
-                quit = MainMenu();
-            } while (quit);
+                GamePages.Pages["MainMenu"].Draw();
 
-        }
-
-        public void Title()
-        {
-            Console.WriteLine("Welcome to the Rig, Written by Adam Hazlehurst");
-            Console.WriteLine("==================================================");
-        }
-
-        public void DisplayAllComponents()
-        {
-            ComponentListViewModel componentListModel = new ComponentListViewModel(_gameManager);
-            string display="";
-            Console.WriteLine("This is a list of all available components. Please type a number to select on");
-
-            foreach (var item in componentListModel.Items)
-            {
-                display += item.Key + ", " + item.Value.Name + Environment.NewLine;
-            }
-            Console.Write(display);
-
-            string selectedValue = Console.ReadLine();
-            int val = -1;
-            if (!int.TryParse(selectedValue, out val))
-            {
-                _selectedItem = null;
-                return;
-            }
-                
-            _selectedItem = componentListModel.Items[val];
-
-        }
-
-        public bool MainMenu()
-        {
-            Console.WriteLine("Main Menu, please select from the list.");
-            if (_selectedItem != null)
-            {
-                DisplayItem();
-            }
-            Console.WriteLine("A: Displays All items.");
-            if (_selectedItem != null)
-            {
-                Console.WriteLine("B: Add '"+_selectedItem.Name+"' to to PC.");
-            }
-
-
-            string selected = Console.ReadLine();
-            if (selected.Equals("A"))
-            {
-                DisplayAllComponents();
-            }
-            if (selected.Equals("B"))
-            {
-                AddItemToBuild();
-            }
-            if (selected.Equals("Q"))
-            {
-                return false;
-            }
-            return true;
-
-        }
-
-        public void AddItemToBuild()
-        {
+            } while (!_endGame);
             
         }
 
-        public  void DisplayItem()
+        public void End()
         {
-            if (_selectedItem != null)
-            {
-                Console.WriteLine("--------------------------------------------------------");
-                Console.WriteLine("Selected Component { Name: " + _selectedItem.Name + ", £" + _selectedItem.Price + "}");
-                Console.ReadKey();
-            }
+            Console.Clear();
+            Credits();
+            Console.ReadKey();
+        }
+
+        public void Credits()
+        {
+            GamePages.Pages["Credits"].Draw();
         }
 
     }
 
-    
 
-    public class ComponentListViewModel
+    public class GamePages
     {
-        private readonly GameManager _gameManager;
-        public Dictionary<int, Item> Items { get; set; }
-        
-        public ComponentListViewModel(GameManager gameManager)
-        {
-            _gameManager = gameManager;
-            Items = new Dictionary<int, Item>();
-            Build();
-        }
+        public Dictionary<string, IPage> Pages { get; set; }
+        public IPage ActivePage { get; set; }
 
-        private void Build()
+        public GamePages(DisplayController displayController)
         {
-            var items = new List<Item>();
-            items.AddRange(_gameManager.UnitOfWork.GetAll());
-
-            int count = 1;
-            foreach(var item  in items)
-            {
-                Items.Add(count, item);
-                count++;
-            }
+            Pages = new Dictionary<string, IPage>();
+            Pages.Add("MainMenu", new MainMenuPage(displayController));
+            Pages.Add("Credits", new CreditsPage());
         }
 
 
     }
+
+    public interface IPage
+    {
+        void Draw();
+    }
+
+    public class CreditsPage : IPage
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Thanks for playing!");
+            Console.WriteLine("===Credits==============================");
+            Console.WriteLine("\tDesign :\t Adam Hazlehurst");
+            Console.WriteLine("\tProgrammer :\t Adam Hazlehurst");
+            Console.WriteLine("\tGraphics :\t Adam Hazlehurst");
+            Console.WriteLine("\tSound :\t\t Adam Hazlehurst");
+        }
+    }
+
+    public class MainMenuPage : IPage
+    {
+        private readonly DisplayController _displayController;
+
+        public MainMenuPage(DisplayController displayController)
+        {
+            _displayController = displayController;
+        }
+
+        public void Draw()
+        {
+            Console.WriteLine("Main Menu");
+            Console.WriteLine("Press 'X' to quit");
+            if (Console.ReadKey().Key == ConsoleKey.X)
+            {
+                _displayController.EndGame= true;
+            }
+        }
+    }
+
 }
