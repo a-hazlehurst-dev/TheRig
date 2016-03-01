@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using TheRig.Core;
 using TheRig.Core.Builders;
 using TheRig.Core.Interfaces;
@@ -12,6 +14,7 @@ namespace TheRig.UI.Controller
     {
         private bool _endGame;
         public IUnitOfWork UnitOfWork { get; private set; }
+        public ComputerRepository ComputerRepository { get; set; }
         public GamePages GamePages { get; set; }
         public bool EndGame
         {
@@ -22,7 +25,6 @@ namespace TheRig.UI.Controller
                 if (key.Key == ConsoleKey.Y)
                 {
                     _endGame = true;
-                    End();
                 }
             }
         }
@@ -30,6 +32,7 @@ namespace TheRig.UI.Controller
         public DisplayController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
+            ComputerRepository = new ComputerRepository();
             GamePages= new GamePages(this);
         }
 
@@ -38,10 +41,11 @@ namespace TheRig.UI.Controller
             do
             {
                 Console.Clear();
-                GamePages.Pages["MainMenu"].Draw();
+                GamePages.ActivePage.Draw();
+            }
+            while (!_endGame);
+            End();
 
-            } while (!_endGame);
-            
         }
 
         public void End()
@@ -69,6 +73,8 @@ namespace TheRig.UI.Controller
             Pages = new Dictionary<string, IPage>();
             Pages.Add("MainMenu", new MainMenuPage(displayController));
             Pages.Add("Credits", new CreditsPage());
+            Pages.Add("ComputerDisplay", new ComputerDisplayPage(displayController));
+            ActivePage = Pages["MainMenu"];
         }
 
 
@@ -104,11 +110,81 @@ namespace TheRig.UI.Controller
         public void Draw()
         {
             Console.WriteLine("Main Menu");
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("C : To Create a new Computer.");
+            Console.WriteLine("D : To Display Computer.");
+            Console.WriteLine("A : To Add components To the Computer.");
+            Console.WriteLine();
             Console.WriteLine("Press 'X' to quit");
-            if (Console.ReadKey().Key == ConsoleKey.X)
+            var key = Console.ReadKey().Key;
+            if (key == ConsoleKey.C)
+            {
+                
+            }
+            if (key == ConsoleKey.D)
+            {
+                var page = (ComputerDisplayPage)_displayController.GamePages.Pages["ComputerDisplay"];
+                page.Computer =_displayController.ComputerRepository.GetComputer("New PC");
+                _displayController.GamePages.ActivePage = page;
+            }
+            
+            if (key == ConsoleKey.X)
             {
                 _displayController.EndGame= true;
             }
+        }
+    }
+
+    public class ComputerRepository
+    {
+        private List<Computer> _computers;
+
+        public ComputerRepository()
+        {
+            _computers = new List<Computer>();
+        }
+        public Computer GetComputer(string name)
+        {
+            var computer = _computers.SingleOrDefault(x => x.Name == name);
+            if (computer==null)
+            {
+                computer = new Computer();
+                AddComputer(computer);
+            }
+            return computer;
+        }
+
+        public void AddComputer(Computer computer)
+        {
+            _computers.Add(computer);
+        }
+    }
+
+    public class ComputerDisplayPage : IPage
+    {
+        private DisplayController _displayController;
+        public Computer Computer { get; set; }
+        public ComputerDisplayPage (DisplayController displayController)
+        {
+            _displayController = displayController;
+        }
+        public void Draw()
+        {
+
+            Console.WriteLine("Computer Blueprint---");
+            Console.WriteLine(Computer.Name);
+            Console.Write("Motherboard: ");
+            if (Computer.Motherboard != null)
+            {
+                Console.WriteLine(Computer.Motherboard.Name);
+            }
+            else
+            {
+                Console.WriteLine("Not set");
+            }
+            Console.Write("Components: " + Computer.Motherboard.Components.Count);
+            Console.ReadKey();
+            _displayController.GamePages.ActivePage = _displayController.GamePages.Pages["MainMenu"];
         }
     }
 
