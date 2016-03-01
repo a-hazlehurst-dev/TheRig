@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using TheRig.Core.Interfaces;
 using TheRig.Models.Components;
@@ -71,6 +71,16 @@ namespace TheRig.UI.Controller
 
 
     public class Player
+    {
+        public List<Computer> ComputerPool { get; set; }
+
+        public Player()
+        {
+            ComputerPool = new List<Computer>();
+        }
+
+        
+    }
     {
         public List<Computer> ComputerPool { get; set; }
 
@@ -220,49 +230,7 @@ namespace TheRig.UI.Controller
 
             Console.WriteLine(computer.Motherboard != null ? computer.Motherboard.Name : "Not set.");
 
-
-            var cpus = computer.Motherboard.CpuSlots;
-            foreach (var cpu in cpus)
-            {
-                var temp = (Cpu)cpu;
-                if (temp.Name == "Not set.")
-                {
-                    Console.WriteLine("\t\tEmpty Ram slot");
-                }
-                else
-                {
-                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
-                }
-            }
-
-            var rams = computer.Motherboard.RamSlots;
-            foreach (var ram in rams)
-            {
-                var temp = (Ram)ram;
-                if (temp.Name == "Not set.")
-                {
-                    Console.WriteLine("\t\tEmpty Ram slot");
-                }
-                else
-                {
-                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
-                }
-            }
-
-            var graphics = computer.Motherboard.GraphicsSlots;
-            foreach (var graphic in graphics)
-            {
-                var temp = (Graphic)graphic;
-                if (temp.Name == "Not set.")
-                {
-                    Console.WriteLine("\t\tEmpty Graphic slot");
-                }
-                else
-                {
-                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
-                }
-            }
-
+            Console.WriteLine("Components:\t " + computer.Motherboard.Components.Count);
             Console.WriteLine();
             Console.WriteLine("A: To add components.");
             Console.WriteLine("Press X to return to menu.");
@@ -271,13 +239,17 @@ namespace TheRig.UI.Controller
             if (key.Key == ConsoleKey.A)
             {
                 _displayController.GamePages.ActivePage = _displayController.GamePages.Pages["AddComponents"];
-            }
+                if (temp.Name == "Not set.")
+                {
+                    Console.WriteLine("\t\tEmpty Ram slot");
+                }
             if (key.Key == ConsoleKey.X)
-            {
+                {
                 _displayController.GoToMainMenu();
             }
-        }
 
+            
+        }
     }
 
     public class PickComputerComponents : IPage
@@ -285,6 +257,48 @@ namespace TheRig.UI.Controller
         private DisplayController _displayController;
         public PickComputerComponents(DisplayController displayController)
         {
+            _displayController = displayController;
+        }
+        public void Draw()
+        {
+            Console.Clear();
+            Console.WriteLine("=====================================");
+            Console.WriteLine(" Computer Blueprint - Add Components");
+            Console.WriteLine("=====================================");
+            Console.WriteLine("");
+            var computer =
+                _displayController.Player.ComputerPool.Single(x => x.Name == _displayController.ActiveComputerName);
+            if (computer.Motherboard.Name == "Not Set")
+            {
+                Console.WriteLine("You must first select a motherboard.");
+                var motherboards = _displayController.UnitOfWork.MotherboardRepository.Find();
+                if (motherboards.Any())
+                {
+                    int x = 0;
+                    foreach (var motherboard in motherboards)
+                    {
+                        Console.WriteLine(x + ": " + motherboard.Name);
+                        x++;
+                    }
+                    var input = Console.ReadLine();
+                    int num = 0;
+                    int.TryParse(input, out num);
+                    computer.Motherboard = motherboards.ElementAt(num);
+                    int t = 0;
+                    for (int k = 0; k < _displayController.Player.ComputerPool.Count; k++)
+                    {
+                        var comp = _displayController.Player.ComputerPool[k];
+                        if (comp.Name.Equals(computer.Name))
+                        {
+                            t = k;
+                            break;
+                        }
+                    }
+                    _displayController.Player.ComputerPool.RemoveAt(t);
+                    _displayController.Player.ComputerPool.Add(computer);
+
+                    Console.WriteLine("Selected: " +computer.Motherboard.Name);
+                }
             _displayController = displayController;
         }
         public void Draw()
@@ -337,24 +351,24 @@ namespace TheRig.UI.Controller
             Console.ReadKey();
             _displayController.GamePages.ActivePage = _displayController.GamePages.Pages["ComputerDisplay"];
         }
+    }
 
-        private List<Item> AddItemToSlot(List<Item> compatibleItems,  List<Item> slots  )
+    public class ComputerCreatorPage : IPage
+    {
+        private readonly DisplayController _controller;
+
+        public ComputerCreatorPage(DisplayController controller)
         {
-            DisplayHelper helper = new DisplayHelper();
+            _controller = controller;
+        }
 
-            var itemToAdd = helper.SelectableList(compatibleItems.ToList());
-            int x = 0;
-            foreach (var slot in slots)
-            {
-                if (slot.Name.Equals("Not set."))
-                {
-                    slots.RemoveAt(x);
-                    break;
-                }
-                x++;
-            }
-
-            slots.Insert(x,itemToAdd);
+        public void Draw()
+        {
+            Console.WriteLine("What do you want to call the Computer.");
+            var name = Console.ReadLine();
+            _controller.ActiveComputerName = name;
+            _controller.Player.ComputerPool.Add(new Computer { Name = name});
+            _controller.GoToMainMenu();
             return slots;
         }
     }
@@ -428,8 +442,8 @@ namespace TheRig.UI.Controller
             _displayController.GoToMainMenu();
         }
     }
+}
 
-    public class DisplayHelper
     {
         public Item SelectableList(List<Item> listOfItems)
         {
