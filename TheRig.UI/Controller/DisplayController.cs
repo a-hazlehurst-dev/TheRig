@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using TheRig.Core.Interfaces;
 using TheRig.UI.Pages;
@@ -234,7 +233,49 @@ namespace TheRig.UI.Controller
             bool go = true;
             do
 
-            Console.WriteLine("Components:\t " + computer.Motherboard.Components.Count);
+
+            var cpus = computer.Motherboard.CpuSlots;
+            foreach (var cpu in cpus)
+            {
+                var temp = (Cpu)cpu;
+                if (temp.Name == "Not set.")
+                {
+                    Console.WriteLine("\t\tEmpty Ram slot");
+                }
+                else
+                {
+                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
+                }
+            }
+
+            var rams = computer.Motherboard.RamSlots;
+            foreach (var ram in rams)
+            {
+                var temp = (Ram)ram;
+                if (temp.Name == "Not set.")
+                {
+                    Console.WriteLine("\t\tEmpty Ram slot");
+                }
+                else
+                {
+                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
+                }
+            }
+
+            var graphics = computer.Motherboard.GraphicsSlots;
+            foreach (var graphic in graphics)
+            {
+                var temp = (Graphic)graphic;
+                if (temp.Name == "Not set.")
+                {
+                    Console.WriteLine("\t\tEmpty Graphic slot");
+                }
+                else
+                {
+                    Console.WriteLine("\t\t" + temp.Name + "(S:" + temp.Speed + " C:" + temp.Price + ")");
+                }
+            }
+
             Console.WriteLine();
             Console.WriteLine("A: To add components.");
             Console.WriteLine("Press X to return to menu.");
@@ -255,9 +296,8 @@ namespace TheRig.UI.Controller
                 {
                     Console.WriteLine(computer.Key + ": " + computer.Value.Name);
             }
-
-            
         }
+
     }
 
     public class PickComputerComponents : IPage
@@ -269,6 +309,7 @@ namespace TheRig.UI.Controller
         }
         public void Draw()
         {
+            DisplayHelper helper = new DisplayHelper();
             Console.Clear();
             Console.WriteLine("=====================================");
             Console.WriteLine(" Computer Blueprint - Add Components");
@@ -276,22 +317,16 @@ namespace TheRig.UI.Controller
             Console.WriteLine("");
             var computer =
                 _displayController.Player.ComputerPool.Single(x => x.Name == _displayController.ActiveComputerName);
-            if (computer.Motherboard.Name == "Not Set")
+            if (computer.Motherboard.Name == "NotSet")
             {
                 Console.WriteLine("You must first select a motherboard.");
                 var motherboards = _displayController.UnitOfWork.MotherboardRepository.Find();
                 if (motherboards.Any())
                 {
-                    int x = 0;
-                    foreach (var motherboard in motherboards)
-                    {
-                        Console.WriteLine(x + ": " + motherboard.Name);
-                        x++;
-                    }
-                    var input = Console.ReadLine();
-                    int num = 0;
-                    int.TryParse(input, out num);
-                    computer.Motherboard = motherboards.ElementAt(num);
+                    var moboItem = helper.SelectableList(motherboards.Cast<Item>().ToList());
+                    computer.Motherboard = (Motherboard)moboItem;
+
+                   
                     int t = 0;
                     for (int k = 0; k < _displayController.Player.ComputerPool.Count; k++)
                     {
@@ -308,6 +343,37 @@ namespace TheRig.UI.Controller
                     Console.WriteLine("Selected: " +computer.Motherboard.Name);
                 }
                 }
+            if (!computer.Motherboard.Name.Equals("Not Set"))
+            {
+                Console.WriteLine("Please select your components.");
+                var cpus= _displayController.UnitOfWork.CpuRepository.GetCompatible(computer.Motherboard);
+                var rams = _displayController.UnitOfWork.RamRepository.GetCompatible(computer.Motherboard);
+                var graphics = _displayController.UnitOfWork.GraphicsRepository.GetCompatible(computer.Motherboard);
+                
+                computer.Motherboard.CpuSlots = AddItemToSlot(cpus.Cast<Item>().ToList(), computer.Motherboard.CpuSlots.Cast<Item>().ToList()).Cast<Cpu>().ToList();
+                computer.Motherboard.RamSlots = AddItemToSlot(rams.Cast<Item>().ToList(), computer.Motherboard.RamSlots.Cast<Item>().ToList()).Cast<Ram>().ToList();
+                computer.Motherboard.GraphicsSlots = AddItemToSlot(graphics.Cast<Item>().ToList(),computer.Motherboard.GraphicsSlots.Cast<Item>().ToList()).Cast<Graphic>().ToList();
+            }
+
+        private List<Item> AddItemToSlot(List<Item> compatibleItems,  List<Item> slots  )
+        {
+            DisplayHelper helper = new DisplayHelper();
+
+            var itemToAdd = helper.SelectableList(compatibleItems.ToList());
+            int x = 0;
+            foreach (var slot in slots)
+            {
+                if (slot.Name.Equals("Not set."))
+                {
+                    slots.RemoveAt(x);
+                    break;
+                }
+                x++;
+            }
+
+            slots.Insert(x,itemToAdd);
+            return slots;
+        }
 
                 var x = Console.ReadLine();
                 int selectedNumber = 0;
@@ -380,6 +446,30 @@ namespace TheRig.UI.Controller
                 }
             } while (go);
             _displayController.GoToMainMenu();
+        }
+    }
+
+    public class DisplayHelper
+    {
+        public Item SelectableList(List<Item> listOfItems)
+        {
+            Console.Write("Please select from the list and type the number next to the item.");
+            int count = 0;
+            foreach (var item in listOfItems)
+            {
+                Console.WriteLine(count + ", " + item.Name);
+                count++;
+            }
+
+            int x = 0;
+            string line = "";
+            do
+            {
+                Console.WriteLine("Please select a valid number");
+                line = Console.ReadLine();
+            } while (!int.TryParse(line, out x));
+
+            return listOfItems.ElementAt(x-1);
         }
     }
 }
