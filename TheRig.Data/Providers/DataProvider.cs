@@ -10,9 +10,9 @@ namespace TheRig.Data.Providers
         {
             return new List<Motherboard>
             {
-                new Motherboard {Id =1, RamTypeId = 1, Name = "Mobo1", CpuTypeId = 1, GraphicsTypeId = 1, SoundTypeId = 3, MaxCpu = 1, MaxGraphics = 1, MaxRam = 2, MaxSound = 1},
-                new Motherboard {Id= 2, RamTypeId = 2,Name = "Mobo2", CpuTypeId = 2, GraphicsTypeId = 2, SoundTypeId = 2, MaxCpu = 1, MaxGraphics = 1, MaxRam = 4, MaxSound = 1},
-                  new Motherboard {Id= 3, RamTypeId = 2,Name = "Mobo3", CpuTypeId = 2, GraphicsTypeId = 3, SoundTypeId = 1, MaxCpu = 2, MaxGraphics = 2, MaxRam = 6, MaxSound = 1}
+                new Motherboard(2, 1, 1, 1) {Id =1, RamTypeId = 1, Name = "Mobo1", CpuTypeId = 1, GraphicsTypeId = 1, SoundTypeId = 3, MaxCpu = 1, MaxGraphics = 1, MaxRam = 2, MaxSound = 1},
+                new Motherboard(2, 1, 1, 1) {Id= 2, RamTypeId = 2,Name = "Mobo2", CpuTypeId = 2, GraphicsTypeId = 2, SoundTypeId = 2, MaxCpu = 1, MaxGraphics = 1, MaxRam = 4, MaxSound = 1},
+                new Motherboard(4,1,1,1) {Id= 3, RamTypeId = 2,Name = "Mobo3", CpuTypeId = 2, GraphicsTypeId = 3, SoundTypeId = 1, MaxCpu = 2, MaxGraphics = 2, MaxRam = 6, MaxSound = 1}
             };
         }
         public List<Ram> GetRam()

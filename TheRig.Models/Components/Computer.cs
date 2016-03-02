@@ -10,7 +10,7 @@ namespace TheRig.Models.Components
     {
         public Computer()
         {
-            Motherboard = new Motherboard {Name = "Not Set"};
+            Motherboard = new Motherboard(0, 0, 0, 0);
         }
         public Motherboard Motherboard { get; set; }
         public string Name { get; set; }
