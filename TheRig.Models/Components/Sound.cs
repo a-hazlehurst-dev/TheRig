@@ -11,6 +11,7 @@ namespace TheRig.Models.Components
         public Sound()
         {
             Type = "Sound";
+            ComponentTypeId = 4;
         }
     }
 }

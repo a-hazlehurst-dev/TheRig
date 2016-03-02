@@ -13,6 +13,7 @@ namespace TheRig.Models.Components
         public Graphic()
         {
             Type = "Graphic";
+            ComponentTypeId = 3;
         }
     }
 }

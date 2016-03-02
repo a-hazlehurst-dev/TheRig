@@ -14,6 +14,7 @@ namespace TheRig.Models.Components
         public Ram()
         {
             Type = "Ram";
+            ComponentTypeId = 2;
         }
     }
 }

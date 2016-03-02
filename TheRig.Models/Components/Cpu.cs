@@ -12,6 +12,7 @@ namespace TheRig.Models.Components
         public Cpu()
         {
             Type = "Cpu";
+            ComponentTypeId = 1;
         }
     }
 }

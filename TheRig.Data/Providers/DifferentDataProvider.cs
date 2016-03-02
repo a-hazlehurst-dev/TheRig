@@ -8,7 +8,7 @@ namespace TheRig.Data.Providers
     {
         public List<Motherboard> GetMotherboards()
         {
-            return new List<Motherboard> { new Motherboard { Id = 1, Name = "New Motherboard", GraphicsTypeId = 1, CpuTypeId = 1, TypeId = 1, RamTypeId = 1, SoundTypeId = 1, TileGridId = 1 } };
+            return new List<Motherboard> { new Motherboard(4,2,2,1) { Id = 1, Name = "New Motherboard", GraphicsTypeId = 1, CpuTypeId = 1, TypeId = 1, RamTypeId = 1, SoundTypeId = 1, TileGridId = 1 } };
         }
 
         public List<Ram> GetRam()
