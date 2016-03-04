@@ -60,7 +60,7 @@ namespace TheRig.Data.Providers
                 new Sound {Id = 1, Name = "Sound1", TileGridId = 1, TypeId = 1},
                 new Sound {Id = 2, Name = "Sound2", TileGridId = 1, TypeId = 1},
                 new Sound {Id = 3, Name = "Sound3", TileGridId = 2, TypeId = 2},
-                new Sound {Id = 4, Name = "Sound4", TileGridId =3, TypeId = 3},
+                new Sound {Id = 4, Name = "Sound4", TileGridId = 3, TypeId = 3},
                 new Sound {Id = 5, Name = "Sound5", TileGridId = 2, TypeId = 2},
                 new Sound {Id = 6, Name = "Sound6", TileGridId = 3, TypeId = 3},
                 new Sound {Id = 7, Name = "Sound7", TileGridId = 3, TypeId = 3},

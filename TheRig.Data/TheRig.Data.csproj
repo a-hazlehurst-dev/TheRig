@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataProvider.cs" />
     <Compile Include="Providers\DifferentDataProvider.cs" />
+    <Compile Include="Repositories\ComputerRepository.cs" />
     <Compile Include="Repositories\CpuRepository.cs" />
     <Compile Include="Repositories\GraphicRepository.cs" />
     <Compile Include="Repositories\MotherboardRepository.cs" />

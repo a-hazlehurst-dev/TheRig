@@ -43,7 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\NewComputerPage.cs" />
+    <Compile Include="Pages\ComputerDescriptionPage.cs" />
+    <Compile Include="Pages\CreditsPage.cs" />
     <Compile Include="Controller\DisplayController.cs" />
+    <Compile Include="Helper\DisplayHelper.cs" />
+    <Compile Include="Pages\FindComputersPage.cs" />
+    <Compile Include="Pages\GamePages.cs" />
+    <Compile Include="Pages\MainMenuPage.cs" />
+    <Compile Include="Pages\PickComputerComponents.cs" />
+    <Compile Include="Pages\IPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
