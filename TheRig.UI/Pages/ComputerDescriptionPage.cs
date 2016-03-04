@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using TheRig.Models.Components;
 using TheRig.UI.Controller;
-using TheRig.UI.Pages;
 
 namespace TheRig.UI.Pages
 {
