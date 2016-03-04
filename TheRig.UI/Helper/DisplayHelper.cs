@@ -27,15 +27,5 @@ namespace TheRig.UI.Helper
 
             return listOfItems.ElementAt(x-1);
         }
-
-
-        public void DisplayStandardTitle()
-        {
-            Console.Clear();
-            Console.WriteLine("=============================================");
-            Console.WriteLine("\tThe Rig");
-            Console.WriteLine("=============================================");
-            Console.WriteLine();
-        }
     }
 }

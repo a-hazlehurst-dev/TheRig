@@ -1,6 +1,6 @@
 using System;
 using TheRig.UI.Controller;
-using TheRig.UI.Pages;
+using TheRig.UI.Helper;
 
 namespace TheRig.UI.Pages
 {
@@ -15,6 +15,7 @@ namespace TheRig.UI.Pages
 
         public void Draw()
         {
+            UITitleHelper.DrawMainTitle();
             Console.Write("Main Menu");
             if (!string.IsNullOrEmpty(_displayController.ActiveComputerName))
             {
