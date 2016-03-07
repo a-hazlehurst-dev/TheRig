@@ -42,13 +42,23 @@
   <ItemGroup>
     <Compile Include="Components\Computer.cs" />
     <Compile Include="Components\Cpu.cs" />
+    <Compile Include="Components\Sockets\CpuSocket.cs" />
     <Compile Include="Components\Graphic.cs" />
+    <Compile Include="Components\Sockets\GraphicsSocket.cs" />
     <Compile Include="Components\Item.cs" />
     <Compile Include="Components\Motherboard.cs" />
     <Compile Include="Components\Ram.cs" />
+    <Compile Include="Components\Sockets\RamSocket.cs" />
+    <Compile Include="Components\Sockets\CpuSocketArray.cs" />
+    <Compile Include="Components\Sockets\GraphicSocketArray.cs" />
     <Compile Include="Components\Sound.cs" />
+    <Compile Include="Components\Sockets\ISocket.cs" />
+    <Compile Include="Components\Sockets\ISocketArray.cs" />
+    <Compile Include="Components\Sockets\SoundSocket.cs" />
+    <Compile Include="Components\Sockets\SoundSocketArray.cs" />
     <Compile Include="Maps\TileGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\Sockets\RamSocketArray.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

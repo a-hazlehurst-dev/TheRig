@@ -1,4 +1,5 @@
 using System;
+using TheRig.Core;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
 
@@ -6,9 +7,9 @@ namespace TheRig.UI.Pages
 {
     public class MainMenuPage : IPage
     {
-        private readonly DisplayController _displayController;
+        private readonly GameController _displayController;
 
-        public MainMenuPage(DisplayController displayController)
+        public MainMenuPage(GameController displayController)
         {
             _displayController = displayController;
         }
@@ -17,9 +18,9 @@ namespace TheRig.UI.Pages
         {
             UITitleHelper.DrawMainTitle();
             Console.Write("Main Menu");
-            if (!string.IsNullOrEmpty(_displayController.ActiveComputerName))
+            if (!string.IsNullOrEmpty(GameState.Instance.Player.ActiveComputerName))
             {
-                Console.WriteLine("\t\t (Selected Computer: " + _displayController.ActiveComputerName + ")");
+                Console.WriteLine("\t\t (Selected Computer: " + GameState.Instance.Player.ActiveComputerName + ")");
             }
             Console.WriteLine("---------------------------");
             Console.WriteLine("A : To Create a new Computer.");

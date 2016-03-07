@@ -1,44 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Metadata;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
+using TheRig.Models.Components.Sockets;
 
 namespace TheRig.Models.Components
 {
     public class Motherboard : Item
     {
 
+        public RamSocketArray RamSocketArray;
+        public CpuSocketArray CpuSocketArray;
+        public GraphicSocketArray GraphicSocketArray;
+        public SoundSocketArray SoundSocketArray;
+
         public Motherboard(int numberOfRamSlots, int numberOfCpuSlots, int numberOfGraphicsSlots, int numberOfSoundSlots)
         {
-            RamSlots =new List<Ram>();
-            CpuSlots = new List<Cpu>();
-            GraphicsSlots = new List<Graphic>();
-            SoundSlots = new List<Sound>();
+            RamSocketArray = new RamSocketArray(numberOfRamSlots);
+            CpuSocketArray = new CpuSocketArray(numberOfCpuSlots);
+            GraphicSocketArray = new GraphicSocketArray(numberOfGraphicsSlots);
+            SoundSocketArray = new SoundSocketArray(numberOfSoundSlots);
+             Name = "NotSet";
+        }
 
-            NumberOfRamSlots = numberOfRamSlots;
-            NumberOfCpuSlots = numberOfCpuSlots;
-            NumberOfGraphicsSlots = numberOfGraphicsSlots;
-            NumberOfSoundSlots = numberOfSoundSlots;
-            
-            for (int x = 0; x < numberOfRamSlots; x++)
+        public ISocketArray GetSocketArray(string name)
+        {
+            ISocketArray socketArray = null;
+
+            if (name.Equals("Cpu"))
             {
-                RamSlots.Add(new Ram {Name = "Not set."});
+                socketArray= CpuSocketArray;
             }
-            for (int x = 0; x < numberOfCpuSlots; x++)
+            if (name.Equals("Ram"))
             {
-                CpuSlots.Add(new Cpu { Name = "Not set."});
+                socketArray = RamSocketArray;
             }
-            for (int x = 0; x < numberOfGraphicsSlots; x++)
+            if (name.Equals("Graphic"))
             {
-                GraphicsSlots.Add(new Graphic { Name = "Not set." });
+                socketArray = GraphicSocketArray;
             }
-            for (int x = 0; x < numberOfSoundSlots; x++)
+            if (name.Equals("Sound"))
             {
-                SoundSlots.Add(new Sound { Name = "Not set." });
+                socketArray = SoundSocketArray;
             }
-            Name = "NotSet";
+            return socketArray;
         }
 
 
@@ -46,38 +55,6 @@ namespace TheRig.Models.Components
         public int RamTypeId { get; set; }
         public int GraphicsTypeId { get; set; }
         public int SoundTypeId { get; set; }
-
-        public int NumberOfCpuSlots { get; set; }
-        public int NumberOfRamSlots { get; set; }
-        public int NumberOfGraphicsSlots { get; set; }
-        public int NumberOfSoundSlots { get; set; }
-
-        public List<Ram>  RamSlots { get; set; }
-        private List<Cpu> _cpus; 
-        public List<Cpu> CpuSlots
-        {
-            get { return _cpus; }
-            set
-            {
-                if (value.Count > MaxCpu)
-                {
-                    while (value.Count>MaxCpu)
-                    {
-                        value.RemoveAt(0);
-                    }
-                }
-                _cpus = value;
-
-            } 
-        }
-
-        public List<Graphic> GraphicsSlots { get; set; }
-        public List<Sound> SoundSlots { get; set; }
-
-        public int MaxRam { get; set; }
-        public int MaxCpu { get; set; }
-        public int MaxGraphics { get; set; }
-        public int MaxSound { get; set; }
 
 
     }

@@ -1,20 +1,17 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
+using TheRig.Core;
 using TheRig.Core.Interfaces;
 using TheRig.UI.Pages;
 
 namespace TheRig.UI.Controller
 {
-    public class DisplayController
+    public class GameController
     {
         private bool _endGame;
         public IUnitOfWork UnitOfWork { get; private set; }
         public ComputerRepository ComputerRepository { get; set; }
         public GamePages GamePages { get; set; }
-        public Player Player { get; set; }
-
-        public string ActiveComputerName { get; set; }
+        
         public bool EndGame
         {
             set
@@ -28,12 +25,10 @@ namespace TheRig.UI.Controller
             }
         }
 
-        public DisplayController(IUnitOfWork unitOfWork)
+        public GameController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
             ComputerRepository = new ComputerRepository();
-            Player = new Player();
-            ActiveComputerName = "Not Set";
             GamePages= new GamePages(this);
 
         }
@@ -65,6 +60,8 @@ namespace TheRig.UI.Controller
         {
             GamePages.ActivePage = GamePages.Pages["MainMenu"];
         }
+
     }
+
 }
 

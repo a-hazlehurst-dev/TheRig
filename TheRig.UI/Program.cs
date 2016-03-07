@@ -11,22 +11,10 @@ namespace ConsoleApplication1
         {
             var dp = new DataProvider();
             var unitOfWork = new UnitOfWork(dp);
-            var displayController = new DisplayController(unitOfWork);
+            var displayController = new GameController(unitOfWork);
             displayController.Start();
 
             
         }
     }
-
-    public class TileGrid
-    {
-        public int Id { get; set; }
-    }
-
-   
-   
-   
-   
-    
-    
 }
