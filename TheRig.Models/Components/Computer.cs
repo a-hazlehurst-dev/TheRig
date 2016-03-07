@@ -15,6 +15,8 @@ namespace TheRig.Models.Components
         public Motherboard Motherboard { get; set; }
         public string Name { get; set; }
 
+        
+
 
     }
 }

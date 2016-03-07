@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheRig.Core;
 using TheRig.Models.Components;
 using TheRig.UI.Controller;
 using TheRig.UI.Pages;
@@ -9,16 +10,16 @@ namespace TheRig.UI.Pages
 {
     public class FindComputersPage : IPage
     {
-        public DisplayController _displayController;
+        public GameController _displayController;
 
-        public FindComputersPage(DisplayController displayController)
+        public FindComputersPage(GameController displayController)
         {
             _displayController = displayController;
         }
         public void Draw()
         {
             Console.Clear();
-            var computers = _displayController.Player.ComputerPool;
+            var computers = GameState.Instance.Player.ComputerPool;
             if (!computers.Any())
             {
                 _displayController.GoToMainMenu();
@@ -51,7 +52,7 @@ namespace TheRig.UI.Pages
                 {
                     go = false;
                     selected = selection[selectedNumber];
-                    _displayController.ActiveComputerName = selected.Name;
+                    GameState.Instance.Player.ActiveComputerName = selected.Name;
                 }
             } while (go);
             _displayController.GoToMainMenu();

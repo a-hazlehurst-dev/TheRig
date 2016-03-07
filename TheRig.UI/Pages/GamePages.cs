@@ -8,8 +8,8 @@ namespace TheRig.UI.Pages
         public Dictionary<string, IPage> Pages { get; set; }
         public IPage ActivePage { get; set; }
 
-        private readonly DisplayController _displayController;
-        public GamePages(DisplayController displayController)
+        private readonly GameController _displayController;
+        public GamePages(GameController displayController)
         {
             _displayController = displayController;
             Pages = new Dictionary<string, IPage>();

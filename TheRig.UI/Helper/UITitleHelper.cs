@@ -13,9 +13,27 @@ namespace TheRig.UI.Helper
         {
             Console.Clear();
             Console.WriteLine("=============================================");
-            Console.WriteLine("\tThe Rig");
+            Console.WriteLine(" The Rig");
             Console.WriteLine("=============================================");
             Console.WriteLine();
+        }
+
+        public static void DrawBluePrintTitle()
+        {
+            Console.Clear();
+            Console.WriteLine("=====================================");
+            Console.WriteLine(" Computer Blueprint");
+            Console.WriteLine("=====================================");
+            Console.WriteLine();
+        }
+
+        public static void AddComponentsTitle()
+        {
+            Console.Clear();
+            Console.WriteLine("=====================================");
+            Console.WriteLine(" Add Components");
+            Console.WriteLine("=====================================");
+            Console.WriteLine("");
         }
 
     }
