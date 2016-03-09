@@ -15,11 +15,8 @@ namespace TheRig.UI.Pages
             Pages = new Dictionary<string, IPage>();
             Pages.Add("MainMenu", new MainMenuPage(_displayController));
             Pages.Add("Credits", new CreditsPage());
-            Pages.Add("CreateComputer", new NewComputerPage(_displayController));
-            Pages.Add("ComputerDisplay", new ComputerDescriptionPage(_displayController));
-            Pages.Add("SelectComputer", new FindComputersPage(_displayController));
-            Pages.Add("AddComponents", new PickComputerComponents(_displayController));
-            Pages.Add("AdvertisingPage", new MarketingMenuPage(_displayController));
+            Pages.Add("AssemblyMenu", new AssemblyMenuPage(_displayController));
+            Pages.Add("MarketingMenu", new MarketingMenuPage(_displayController));
             ActivePage = Pages["MainMenu"];
         }
 

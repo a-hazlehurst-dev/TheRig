@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AdvertisingManager.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
+    <Compile Include="CustomerManager.cs" />
     <Compile Include="HypeManager.cs" />
     <Compile Include="CustomerHypeMeter.cs" />
     <Compile Include="GameManager.cs" />

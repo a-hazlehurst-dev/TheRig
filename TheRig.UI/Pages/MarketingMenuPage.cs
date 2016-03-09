@@ -23,7 +23,7 @@ namespace TheRig.UI.Pages
         public void Draw()
         {
             UiTitleHelper.DrawAdvertismentTitle(_gameController);
-            Console.WriteLine("Active Campaigns");
+            Console.WriteLine("Active Advertising Campaigns");
             Console.WriteLine("------------------------");
             foreach (var advertisingCampaign in _advertisingManager.Active)
             {
@@ -38,15 +38,38 @@ namespace TheRig.UI.Pages
                     Console.Write(name.Name+", ");
                 }
                 Console.WriteLine("");
-                
+                Console.WriteLine("------------------------");
+
+
             }
             Console.WriteLine("");
             Console.WriteLine("Hype Meters");
             Console.WriteLine("---------------------");
+            int count = 0;
             foreach (var meter in _hypeManager.HypeMeters)
             {
-                Console.WriteLine(meter.Name + " { Hype: " + meter.Current.ToString("0.00") + " }");
+                Console.Write(meter.Name);
+                if (meter.Name.Length < 8)
+                {
+                    Console.Write("\t\t");
+                }
+                else
+                {
+                    Console.Write("\t");
+                }
+                if (count%2 == 0)
+                {
+                    Console.Write("{ Hype: " + meter.Current.ToString("0.00") + " }\t");
+                }
+                else
+                {
+                    Console.WriteLine("{ Hype: " + meter.Current.ToString("0.00") + " }");
+                }
+                count++;
             }
+
+                
+            
             Console.WriteLine();
 
             Console.WriteLine("X: Main Menu.");

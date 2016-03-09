@@ -56,6 +56,7 @@
     <Compile Include="Components\Sockets\ISocketArray.cs" />
     <Compile Include="Components\Sockets\SoundSocket.cs" />
     <Compile Include="Components\Sockets\SoundSocketArray.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Maps\TileGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Sockets\RamSocketArray.cs" />
