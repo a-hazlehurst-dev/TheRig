@@ -8,10 +8,6 @@ namespace TheRig.UI.Controller
     public class GameController
     {
         private bool _endGame;
-        public IUnitOfWork UnitOfWork { get; private set; }
-        public ComputerRepository ComputerRepository { get; set; }
-        public GamePages GamePages { get; set; }
-        
         public bool EndGame
         {
             set
@@ -24,11 +20,16 @@ namespace TheRig.UI.Controller
                 }
             }
         }
+        public IUnitOfWork UnitOfWork { get; private set; }
+        public GamePages GamePages { get; set; }
+        public Player Player { get; set; } 
+        public DateTime GameDate { get; set; }
 
         public GameController(IUnitOfWork unitOfWork)
         {
+            GameDate = new DateTime(1990, 1,6);
             UnitOfWork = unitOfWork;
-            ComputerRepository = new ComputerRepository();
+            Player = new Player(GameDate);
             GamePages= new GamePages(this);
 
         }
@@ -47,21 +48,21 @@ namespace TheRig.UI.Controller
         public void End()
         {
             Console.Clear();
-            Credits();
+            GamePages.Pages["Credits"].Draw();
             Console.ReadKey();
         }
 
-        public void Credits()
-        {
-            GamePages.Pages["Credits"].Draw();
-        }
 
         public void GoToMainMenu()
         {
             GamePages.ActivePage = GamePages.Pages["MainMenu"];
         }
 
+        public void Turn()
+        {
+            GameDate = GameDate.AddDays(7);
+            Player.Turn(GameDate);
+        }
     }
-
 }
 
