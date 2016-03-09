@@ -54,7 +54,7 @@ namespace TheRig.UI.Pages
 
         public void Draw()
         {
-            UITitleHelper.DrawBluePrintTitle();
+            UiTitleHelper.DrawBluePrintTitle(_displayController);
 
             var computer = GameState.Instance.Player.GetActiveComputer();
             Console.WriteLine("Name: \t" + computer.Name);

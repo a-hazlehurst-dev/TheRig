@@ -11,6 +11,7 @@ namespace TheRig.Core.Interfaces
         IRamRepository RamRepository { get; }
         ISoundRepository SoundRepository { get;  }
         IGraphicRepository GraphicsRepository { get; }
+        
 
         List<Item> GetAll();
         List<Item> GetCompatibleItems(Motherboard motherboard);

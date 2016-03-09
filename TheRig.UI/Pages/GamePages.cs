@@ -19,6 +19,7 @@ namespace TheRig.UI.Pages
             Pages.Add("ComputerDisplay", new ComputerDescriptionPage(_displayController));
             Pages.Add("SelectComputer", new FindComputersPage(_displayController));
             Pages.Add("AddComponents", new PickComputerComponents(_displayController));
+            Pages.Add("AdvertisingPage", new MarketingMenuPage(_displayController));
             ActivePage = Pages["MainMenu"];
         }
 

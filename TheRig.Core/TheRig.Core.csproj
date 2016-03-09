@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvertisingManager.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
+    <Compile Include="HypeManager.cs" />
+    <Compile Include="CustomerHypeMeter.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Interfaces\IDataProvider.cs" />
+    <Compile Include="Interfaces\IMeter.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Repositories\ICpuRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGraphicRepository.cs" />
