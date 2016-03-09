@@ -48,5 +48,14 @@ namespace TheRig.UI.Helper
             Console.WriteLine("");
         }
         
+        public static void DrawAdvertismentTitle(GameController gameController)
+        {
+            TitleBar(gameController);
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine(" Advertising");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("");
+        }
+        
     }
 }
