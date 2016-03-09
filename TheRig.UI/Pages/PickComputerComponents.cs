@@ -19,7 +19,7 @@ namespace TheRig.UI.Pages
         public void Draw()
         {
             DisplayHelper helper = new DisplayHelper();
-            UITitleHelper.AddComponentsTitle();
+            UiTitleHelper.AddComponentsTitle(_displayController);
 
             var computer = GameState.Instance.Player.GetActiveComputer();
             if (computer.Motherboard.Name == "NotSet")

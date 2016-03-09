@@ -13,7 +13,7 @@ namespace TheRig.Core
                 if (_instance == null)
                 {
                     _instance = new GameState();
-                    _instance.Player = new Player();
+                    _instance.Player = new Player(DateTime.Now);
                 }
                 return _instance;
             }

@@ -16,7 +16,7 @@ namespace TheRig.UI.Pages
 
         public void Draw()
         {
-            UITitleHelper.DrawMainTitle();
+            UiTitleHelper.DrawMainTitle(_displayController);
             Console.Write("Main Menu");
             if (!string.IsNullOrEmpty(GameState.Instance.Player.ActiveComputerName))
             {
@@ -26,6 +26,9 @@ namespace TheRig.UI.Pages
             Console.WriteLine("A : To Create a new Computer.");
             Console.WriteLine("B : To Display Computer.");
             Console.WriteLine("D : Find and Select computer.");
+            Console.WriteLine("E : Marketing Department.");
+            Console.WriteLine();
+            Console.WriteLine("Z : Next Turn.");
             Console.WriteLine();
             Console.WriteLine("Press 'X' to quit");
             var key = Console.ReadKey().Key;
@@ -45,7 +48,15 @@ namespace TheRig.UI.Pages
                 var page = (FindComputersPage)_displayController.GamePages.Pages["SelectComputer"];
                 _displayController.GamePages.ActivePage = page;
             }
-
+            if (key == ConsoleKey.E)
+            {
+                var page = (MarketingMenuPage)_displayController.GamePages.Pages["AdvertisingPage"];
+                _displayController.GamePages.ActivePage = page;
+            }
+            if (key == ConsoleKey.Z)
+            {
+                _displayController.Turn();
+            }
             if (key == ConsoleKey.X)
             {
                 _displayController.EndGame= true;

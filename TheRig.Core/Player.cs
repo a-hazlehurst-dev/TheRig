@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheRig.Models.Components;
@@ -9,9 +10,24 @@ namespace TheRig.Core
         public string ActiveComputerName { get; set; }
         public List<Computer> ComputerPool { get; set; }
 
-        public Player()
+        public AdvertisingManager Advertising { get; set; }
+        public HypeManager HypeManager { get; set; }
+
+        public Player(DateTime datetime)
         {
             ComputerPool = new List<Computer>();
+            HypeManager = new HypeManager();
+            Advertising = new AdvertisingManager();
+            Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
+            {
+                StartDate = datetime.AddDays(7),
+                EndDate = datetime.AddMonths(2),
+                Primary = new Demographic { Name ="Youths"},
+                Secondary = new List<Demographic>
+                {
+                    new Demographic { Name ="Kids" }
+                }
+            });
             ActiveComputerName = "Not Set.";
         }
 
@@ -25,6 +41,11 @@ namespace TheRig.Core
         {
             return ComputerPool.SingleOrDefault(x => x.Name.Equals(ActiveComputerName));
         }
-        
+
+        public void Turn(DateTime gameDate)
+        {
+            Advertising.Turn(gameDate);
+            HypeManager.Turn(gameDate, Advertising.Active);
+        }
     }
 }
