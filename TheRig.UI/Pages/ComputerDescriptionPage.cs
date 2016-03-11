@@ -6,6 +6,7 @@ using TheRig.Models.Components;
 using TheRig.Models.Components.Sockets;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
+using TheRig.UI.Pages.Interfaces;
 
 namespace TheRig.UI.Pages
 {
@@ -18,7 +19,11 @@ namespace TheRig.UI.Pages
         {
             _displayController = displayController;
         }
-        
+
+        public void Back()
+        {
+            _displayController.GoToMainMenu();
+        }
 
         public void DisplayComponents(Computer computer,SocketType socketType,ref int count, Dictionary<int, ISocket> binding )
         {
@@ -84,7 +89,7 @@ namespace TheRig.UI.Pages
             }
             if (key.Key == ConsoleKey.X)
             {
-                _displayController.GoToMainMenu();
+                Back();
             }
 
             ISocket socket = null;
@@ -150,7 +155,9 @@ namespace TheRig.UI.Pages
             }
         }
 
-
-
+        public void Title()
+        {
+            return;
+        }
     }
 }

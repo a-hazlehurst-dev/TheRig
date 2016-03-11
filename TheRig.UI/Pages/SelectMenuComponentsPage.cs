@@ -6,6 +6,7 @@ using TheRig.Models.Components;
 using TheRig.Models.Components.Sockets;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
+using TheRig.UI.Pages.Interfaces;
 using TheRig.UI.Pages.Menus;
 
 namespace TheRig.UI.Pages
@@ -212,11 +213,11 @@ namespace TheRig.UI.Pages
         public void MenuOptions()
         {
             Console.WriteLine("A: Change the selected blueprint.");
-            Console.WriteLine("B: Select Motherboard");
-            Console.WriteLine("C: Select Cpu");
-            Console.WriteLine("D: Select Ram");
-            Console.WriteLine("E: Select Graphics");
-            Console.WriteLine("F: Select Sound");
+            Console.WriteLine("B: Select Motherboard.");
+            Console.WriteLine("C: Select Cpu.");
+            Console.WriteLine("D: Select Ram.");
+            Console.WriteLine("E: Select Graphics.");
+            Console.WriteLine("F: Select Sound.");
             Console.WriteLine("X: Go back to previous screen.");
         }
 

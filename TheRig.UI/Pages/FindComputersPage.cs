@@ -4,7 +4,7 @@ using System.Linq;
 using TheRig.Core;
 using TheRig.Models.Components;
 using TheRig.UI.Controller;
-using TheRig.UI.Pages;
+using TheRig.UI.Pages.Interfaces;
 
 namespace TheRig.UI.Pages
 {
@@ -16,6 +16,12 @@ namespace TheRig.UI.Pages
         {
             _displayController = displayController;
         }
+
+        public void Back()
+        {
+            _displayController.GoToMainMenu();
+        }
+
         public void Draw()
         {
             Console.Clear();
@@ -55,7 +61,12 @@ namespace TheRig.UI.Pages
                     GameState.Instance.Player.ActiveComputerName = selected.Name;
                 }
             } while (go);
-            _displayController.GoToMainMenu();
+            Back();
+        }
+
+        public void Title()
+        {
+            return;
         }
     }
 }
