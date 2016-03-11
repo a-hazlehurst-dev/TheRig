@@ -16,7 +16,7 @@ namespace TheRig.Models.Components
             CpuSocketArray = new CpuSocketArray(numberOfCpuSlots);
             GraphicSocketArray = new GraphicSocketArray(numberOfGraphicsSlots);
             SoundSocketArray = new SoundSocketArray(numberOfSoundSlots);
-             Name = "NotSet";
+             Name = "Not set.";
         }
 
         public ISocketArray GetSocketArray(SocketType type)
