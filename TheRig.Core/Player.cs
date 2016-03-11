@@ -19,14 +19,20 @@ namespace TheRig.Core
 
         public CustomerManager CustomerManager { get; set; }
         public FinanceManager FinanceManager { get; set; }
+        public PurchasingManager PurchasingManager { get; set; }
+        public InventoryManager InventoryManager { get; set; }
 
         public Player(DateTime datetime)
         {
+            
             ComputerPool = new List<Computer>();
             HypeManager = new HypeManager();
             Advertising = new AdvertisingManager();
             BlueprintManager = new BlueprintManager();
             FinanceManager = new FinanceManager(1000.0M);
+            InventoryManager = new InventoryManager();
+            PurchasingManager = new PurchasingManager(FinanceManager, InventoryManager);
+
             Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
             {
                 StartDate = datetime.AddDays(7),
@@ -75,20 +81,24 @@ namespace TheRig.Core
     public class FinanceManager
     {
         private decimal _funds = 0.0M;
+        public TransactionManager TransactionManager { get; private set; }
         public FinanceManager(decimal startFunds)
         {
-            CreditFunds(startFunds);
+            TransactionManager = new TransactionManager();
+            CreditFunds(new Transaction { Name = "Start up", Value = startFunds, DateCreated = GameState.Instance.GameTime, Quantity = 1 });
         }
 
 
-        public void CreditFunds(decimal funds)
+        public void CreditFunds(Transaction transaction)
         {
-            _funds += funds;
+            _funds += transaction.Value;
+            TransactionManager.Add(transaction);
         }
 
-        public void DebitFunds(decimal funds)
+        public void DebitFunds(Transaction transaction)
         {
-            _funds -= funds;
+            _funds -= transaction.Value;
+            TransactionManager.Add(transaction);
         }
 
         public decimal GetFunds()

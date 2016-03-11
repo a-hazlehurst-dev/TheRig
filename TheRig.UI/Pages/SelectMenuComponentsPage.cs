@@ -6,6 +6,7 @@ using TheRig.Models.Components;
 using TheRig.Models.Components.Sockets;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
+using TheRig.UI.Pages.Interfaces;
 using TheRig.UI.Pages.Menus;
 
 namespace TheRig.UI.Pages
