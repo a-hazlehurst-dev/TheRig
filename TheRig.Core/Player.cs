@@ -21,7 +21,6 @@ namespace TheRig.Core
 
         public Player(DateTime datetime)
         {
-            Blueprints = new List<Blueprint>();
             ComputerPool = new List<Computer>();
             HypeManager = new HypeManager();
             Advertising = new AdvertisingManager();

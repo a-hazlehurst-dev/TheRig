@@ -1,5 +1,6 @@
 using System;
 using TheRig.Core;
+using TheRig.Models;
 using TheRig.Models.Components;
 using TheRig.UI.Controller;
 

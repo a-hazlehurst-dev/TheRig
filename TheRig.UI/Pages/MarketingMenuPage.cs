@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using TheRig.Core;
+using TheRig.Core.Managers;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
 
