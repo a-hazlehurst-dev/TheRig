@@ -1,12 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Metadata;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-using TheRig.Models.Components.Sockets;
+﻿using TheRig.Models.Components.Sockets;
 
 namespace TheRig.Models.Components
 {
@@ -27,23 +19,23 @@ namespace TheRig.Models.Components
              Name = "NotSet";
         }
 
-        public ISocketArray GetSocketArray(string name)
+        public ISocketArray GetSocketArray(SocketType type)
         {
             ISocketArray socketArray = null;
 
-            if (name.Equals("Cpu"))
+            if (type== SocketType.Cpu)
             {
                 socketArray= CpuSocketArray;
             }
-            if (name.Equals("Ram"))
+            if (type== SocketType.Ram)
             {
                 socketArray = RamSocketArray;
             }
-            if (name.Equals("Graphic"))
+            if (type == SocketType.Graphics)
             {
                 socketArray = GraphicSocketArray;
             }
-            if (name.Equals("Sound"))
+            if (type == SocketType.Sound)
             {
                 socketArray = SoundSocketArray;
             }
@@ -57,5 +49,13 @@ namespace TheRig.Models.Components
         public int SoundTypeId { get; set; }
 
 
+    }
+
+    public enum SocketType
+    {
+        Cpu,
+        Ram,
+        Graphics,
+        Sound,
     }
 }

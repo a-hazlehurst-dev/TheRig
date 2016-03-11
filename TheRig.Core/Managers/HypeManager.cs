@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheRig.Core.Interfaces;
 
-namespace TheRig.Core
+namespace TheRig.Core.Managers
 {
     public class HypeManager
     {
@@ -14,20 +13,15 @@ namespace TheRig.Core
             HypeMeters = new List<CustomerHypeMeter>
             {
                 new CustomerHypeMeter(-100,100 ,0, "Kids"),
-                new CustomerHypeMeter(-100, 100, 0, "Youths")
+                new CustomerHypeMeter(-100, 100, 0, "Youths"),
+                new CustomerHypeMeter(-100, 100, 0, "Young Adults"),
+                new CustomerHypeMeter(-100, 100, 0, "Adults"),
+                new CustomerHypeMeter(-100, 100, 0, "Middle Aged"),
+                new CustomerHypeMeter(-100, 100, 0, "Veteran"),
+                new CustomerHypeMeter(-100, 100, 0, "Retired"),
             };
         }
 
-        public void ProcessHype()
-        {
-            foreach (var meter in HypeMeters)
-            {
-                var effect = 0.0f;
-                
-                meter.Change(effect);
-
-            }
-        }
 
         private void ProcessAdvertisingHype(List<AdvertisingCampaign> campaigns)
         {
@@ -38,10 +32,10 @@ namespace TheRig.Core
                 foreach (var campaign in activeCampaigns)
                 {
                     ChangeHypeMeter(campaign.Primary.Name, 2);
-
+                    
                     foreach (var demographic in campaign.Secondary)
                     {
-                       ChangeHypeMeter(demographic.Name, 1);
+                       ChangeHypeMeter(demographic.Name, .8f);
                     }
                 }
             }
@@ -66,9 +60,14 @@ namespace TheRig.Core
         {
             foreach (var hypeMeter in HypeMeters)
             {
-                var decayRate = (hypeMeter.Current/150)*-1;
+                var decayRate = (hypeMeter.Current/125)*-1;
                 hypeMeter.Change(decayRate);
             }
+        }
+
+        public double GetTotalHype()
+        {
+            return  HypeMeters.Sum(x => x.Current);
         }
     }
     
@@ -120,6 +119,44 @@ namespace TheRig.Core
         Completed
     }
 
-    
+    public class Region
+    {
+        public string Name { get; set; }
+        public int BaseCustomers { get; set; }
+        public RegionDemographic Demographic { get; set; }
+        public HypeManager Hype { get; set; }
+    }
+
+    public class RegionDemographic
+    {
+        public Wealth Wealth { get; set; }
+        public Type Type { get; set; }
+        
+        
+    }
+
+    public enum Wealth
+    {
+        Poor,
+        Low,
+        Average,
+        Good,
+        Wealthy,
+        Rich
+        
+    }
+
+    public enum Type
+    {
+        Residential,
+        Commercial,
+        Industrial
+    }
+
+
+    public class BalanceScale
+    {
+        
+    }
 
 }

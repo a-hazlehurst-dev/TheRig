@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvertisingManager.cs" />
+    <Compile Include="Managers\AdvertisingManager.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
-    <Compile Include="HypeManager.cs" />
+    <Compile Include="Managers\BlueprintManager.cs" />
+    <Compile Include="Managers\CustomerManager.cs" />
+    <Compile Include="Managers\HypeManager.cs" />
     <Compile Include="CustomerHypeMeter.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="Managers\GameManager.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Interfaces\IDataProvider.cs" />
     <Compile Include="Interfaces\IMeter.cs" />

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheRig.Core.Managers;
+using TheRig.Models;
 using TheRig.Models.Components;
 
 namespace TheRig.Core
@@ -10,8 +12,12 @@ namespace TheRig.Core
         public string ActiveComputerName { get; set; }
         public List<Computer> ComputerPool { get; set; }
 
+        public BlueprintManager BlueprintManager { get; set; }
+
         public AdvertisingManager Advertising { get; set; }
         public HypeManager HypeManager { get; set; }
+
+        public CustomerManager CustomerManager { get; set; }
 
         public Player(DateTime datetime)
         {
@@ -21,16 +27,28 @@ namespace TheRig.Core
             Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
             {
                 StartDate = datetime.AddDays(7),
-                EndDate = datetime.AddMonths(2),
+                EndDate = datetime.AddMonths(6),
                 Primary = new Demographic { Name ="Youths"},
                 Secondary = new List<Demographic>
                 {
                     new Demographic { Name ="Kids" }
                 }
             });
+            Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
+            {
+                StartDate = datetime.AddDays(7),
+                EndDate = datetime.AddMonths(8),
+                Primary = new Demographic { Name = "Adults" },
+                Secondary = new List<Demographic>
+                {
+                    new Demographic { Name ="Kids" },
+                    new Demographic { Name ="Retired" },
+                    new Demographic { Name ="Youths" },
+                }
+            });
             ActiveComputerName = "Not Set.";
+            CustomerManager = new CustomerManager(HypeManager);
         }
-
 
         public Computer GetComputer(string name)
         {
@@ -46,6 +64,8 @@ namespace TheRig.Core
         {
             Advertising.Turn(gameDate);
             HypeManager.Turn(gameDate, Advertising.Active);
+            CustomerManager.Turn(gameDate);
+
         }
     }
 }

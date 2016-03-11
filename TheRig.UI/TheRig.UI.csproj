@@ -44,8 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\UITitleHelper.cs" />
+    <Compile Include="Pages\AssemblyMenuPage.cs" />
     <Compile Include="Pages\MarketingMenuPage.cs" />
-    <Compile Include="Pages\NewComputerPage.cs" />
+    <Compile Include="Pages\CreateBlueprint.cs" />
     <Compile Include="Pages\ComputerDescriptionPage.cs" />
     <Compile Include="Pages\CreditsPage.cs" />
     <Compile Include="Controller\GameController.cs" />
