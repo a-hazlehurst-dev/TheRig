@@ -1,5 +1,4 @@
 using System;
-using TheRig.Core;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
 
@@ -24,8 +23,6 @@ namespace TheRig.UI.Pages
             Console.WriteLine();
             Console.WriteLine("Z:\tNext Turn.");
             Console.WriteLine();
-            Console.WriteLine("Z : Next Turn.");
-            Console.WriteLine();
             Console.WriteLine("Press 'X' to quit");
             var key = Console.ReadKey().Key;
             if (key == ConsoleKey.A)
@@ -36,14 +33,6 @@ namespace TheRig.UI.Pages
             if (key == ConsoleKey.B)
             {
                 var page = (MarketingMenuPage)_displayController.GamePages.Pages["MarketingMenu"];
-                _displayController.GamePages.ActivePage = page;
-            }
-            if (key == ConsoleKey.Z)
-            {
-                _displayController.Turn();
-            }
-            {
-                var page = (MarketingMenuPage)_displayController.GamePages.Pages["AdvertisingPage"];
                 _displayController.GamePages.ActivePage = page;
             }
             if (key == ConsoleKey.Z)

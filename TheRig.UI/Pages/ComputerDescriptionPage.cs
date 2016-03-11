@@ -20,14 +20,14 @@ namespace TheRig.UI.Pages
         }
         
 
-        public void DisplayComponents(Computer computer, string name,ref int count, Dictionary<int, ISocket> binding )
+        public void DisplayComponents(Computer computer,SocketType socketType,ref int count, Dictionary<int, ISocket> binding )
         {
             
-            foreach (var socket in computer.Motherboard.GetSocketArray(name).Sockets)
+            foreach (var socket in computer.Motherboard.GetSocketArray(socketType).Sockets)
             {
                 
-                Console.Write("\t"+name+" slot " + socket.Key + ", ");
-                if (name.Length >= 6)
+                Console.Write("\t"+ socketType + " slot " + socket.Key + ", ");
+                if (socketType == SocketType.Graphics)
                 {
                     Console.Write("\t");
                 }
@@ -65,10 +65,10 @@ namespace TheRig.UI.Pages
             Console.WriteLine("");
             int count = 1;
             Dictionary<int, ISocket> binding = new Dictionary<int, ISocket>();
-            DisplayComponents(computer, "Cpu", ref count, binding);
-            DisplayComponents(computer, "Ram", ref count, binding);
-            DisplayComponents(computer, "Graphic", ref count, binding);
-            DisplayComponents(computer, "Sound", ref count, binding);
+            DisplayComponents(computer, SocketType.Cpu, ref count, binding);
+            DisplayComponents(computer, SocketType.Ram, ref count, binding);
+            DisplayComponents(computer, SocketType.Graphics, ref count, binding);
+            DisplayComponents(computer, SocketType.Sound, ref count, binding);
 
 
             var sounds = computer.Motherboard.SoundSocketArray;
@@ -115,22 +115,22 @@ namespace TheRig.UI.Pages
 
             if (socket != null)
             {
-                SelectCompatibleOptins(socket, "Cpu", computer.Motherboard.CpuSocketArray, _displayController.UnitOfWork.CpuRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
-                SelectCompatibleOptins(socket, "Ram", computer.Motherboard.RamSocketArray, _displayController.UnitOfWork.RamRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
-                SelectCompatibleOptins(socket, "Graphic", computer.Motherboard.GraphicSocketArray, _displayController.UnitOfWork.GraphicsRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
-                SelectCompatibleOptins(socket, "Sound", computer.Motherboard.SoundSocketArray, _displayController.UnitOfWork.SoundRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
+                SelectCompatibleOptions(socket, SocketType.Cpu, computer.Motherboard.CpuSocketArray, _displayController.UnitOfWork.CpuRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
+                SelectCompatibleOptions(socket, SocketType.Ram, computer.Motherboard.RamSocketArray, _displayController.UnitOfWork.RamRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
+                SelectCompatibleOptions(socket, SocketType.Graphics, computer.Motherboard.GraphicSocketArray, _displayController.UnitOfWork.GraphicsRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
+                SelectCompatibleOptions(socket, SocketType.Sound,computer.Motherboard.SoundSocketArray, _displayController.UnitOfWork.SoundRepository.GetCompatible(computer.Motherboard).Cast<Item>().ToList());
 
                 Console.ReadKey();
             }
          
         }
 
-        public void SelectCompatibleOptins(ISocket socket, string type, ISocketArray socketArray, List<Item> compatible )
+        public void SelectCompatibleOptions(ISocket socket, SocketType socketType, ISocketArray socketArray, List<Item> compatible )
         {
-            if (socket.Type == type)
+            if (socket.Type == socketType)
             {
                 var index = 1;
-                Console.WriteLine("Please select the "+ type);
+                Console.WriteLine("Please select the "+ socketType);
                 
                 foreach (var item in compatible)
                 {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using TheRig.Models;
 
-namespace TheRig.Core
+namespace TheRig.Core.Managers
 {
     public class CustomerManager
     {

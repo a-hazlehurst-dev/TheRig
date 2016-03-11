@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TheRig.Core
+namespace TheRig.Core.Managers
 {
     public class AdvertisingManager
     {

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheRig.Core.Managers;
+using TheRig.Models;
 using TheRig.Models.Components;
 
 namespace TheRig.Core
@@ -10,14 +12,16 @@ namespace TheRig.Core
         public string ActiveComputerName { get; set; }
         public List<Computer> ComputerPool { get; set; }
 
+        public BlueprintManager BlueprintManager { get; set; }
+
         public AdvertisingManager Advertising { get; set; }
         public HypeManager HypeManager { get; set; }
 
         public CustomerManager CustomerManager { get; set; }
-        
 
         public Player(DateTime datetime)
         {
+            Blueprints = new List<Blueprint>();
             ComputerPool = new List<Computer>();
             HypeManager = new HypeManager();
             Advertising = new AdvertisingManager();
@@ -65,6 +69,4 @@ namespace TheRig.Core
 
         }
     }
-
-    
 }

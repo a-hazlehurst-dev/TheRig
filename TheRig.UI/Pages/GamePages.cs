@@ -17,7 +17,8 @@ namespace TheRig.UI.Pages
             Pages.Add("Credits", new CreditsPage());
             Pages.Add("AssemblyMenu", new AssemblyMenuPage(_displayController));
             Pages.Add("MarketingMenu", new MarketingMenuPage(_displayController));
-            Pages.Add("AdvertisingPage", new MarketingMenuPage(_displayController));
+            Pages.Add("Create-Blueprint", new CreateBlueprint(_displayController));
+
             ActivePage = Pages["MainMenu"];
         }
 

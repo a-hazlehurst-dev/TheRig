@@ -29,15 +29,18 @@ namespace TheRig.UI.Pages
             var key = Console.ReadLine();
             if (key == "A" || key == "a")
             {
-                
+                var page = (CreateBlueprint)_gameController.GamePages.Pages["Create-Blueprint"];
+                _gameController.GamePages.ActivePage = page;
             }
             if (key == "B" || key == "b")
             {
-
+                var page = (AssemblyMenuPage)_gameController.GamePages.Pages["AssemblyMenu"];
+                _gameController.GamePages.ActivePage = page;
             }
             if (key == "C" || key == "c")
             {
-
+                var page = (AssemblyMenuPage)_gameController.GamePages.Pages["AssemblyMenu"];
+                _gameController.GamePages.ActivePage = page;
             }
             if (key == "X" || key == "x")
             {

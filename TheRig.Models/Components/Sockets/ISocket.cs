@@ -2,7 +2,7 @@
 {
     public interface ISocket
     {
-        string Type { get; }
+        SocketType Type { get; }
         bool IsInstalled { get; set; }
         Item Item { get; set; }
     }
