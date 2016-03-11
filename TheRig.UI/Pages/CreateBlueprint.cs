@@ -3,6 +3,7 @@ using TheRig.Core;
 using TheRig.Models;
 using TheRig.Models.Components;
 using TheRig.UI.Controller;
+using TheRig.UI.Pages.Menus;
 
 namespace TheRig.UI.Pages
 {
@@ -39,6 +40,7 @@ namespace TheRig.UI.Pages
             {
                 Console.WriteLine("Please provide a unique name for your blueprint.");
                 name = Console.ReadLine();
+
                 if (string.IsNullOrWhiteSpace(name)|| _controller.Player.BlueprintManager.GetBlueprintByName(name) !=null)
                 {
                     Console.WriteLine("Invalid name.");

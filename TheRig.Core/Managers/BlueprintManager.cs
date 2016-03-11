@@ -7,6 +7,7 @@ namespace TheRig.Core.Managers
     public class BlueprintManager
     {
         public List<Blueprint> Blueprints { get; private set; }
+        public Blueprint SelectedBlueprint { get; set; }
 
         public BlueprintManager()
         {
@@ -21,5 +22,6 @@ namespace TheRig.Core.Managers
         {
             Blueprints.Add(blueprint);
         }
+
     }
 }

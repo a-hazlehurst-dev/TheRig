@@ -9,7 +9,7 @@ namespace TheRig.UI.Helper
     {
         public Item SelectableList(List<Item> listOfItems)
         {
-            Console.Write("Please select from the list and type the number next to the item.");
+            Console.WriteLine("Please select from the list and type the number next to the item.");
             int count = 0;
             foreach (var item in listOfItems)
             {
@@ -25,7 +25,7 @@ namespace TheRig.UI.Helper
                 line = Console.ReadLine();
             } while (!int.TryParse(line, out x));
 
-            return listOfItems.ElementAt(x-1);
+            return listOfItems.ElementAt(x);
         }
     }
 }
