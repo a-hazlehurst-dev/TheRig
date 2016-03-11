@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TheRig.UI.Controller;
+using TheRig.UI.Pages.Menus;
 
 namespace TheRig.UI.Pages
 {
@@ -19,8 +20,12 @@ namespace TheRig.UI.Pages
             Pages.Add("MarketingMenu", new MarketingMenuPage(_displayController));
             Pages.Add("Create-Blueprint", new CreateBlueprint(_displayController));
 
+            Pages.Add("Select-BlueprintComponents", new SelectMenuComponentsPage(_displayController));
+
             ActivePage = Pages["MainMenu"];
         }
 
     }
+
+    
 }

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using TheRig.Core;
 using TheRig.Core.Managers;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
 
-namespace TheRig.UI.Pages
+namespace TheRig.UI.Pages.Menus
 {
     public class MarketingMenuPage : IPage
     {

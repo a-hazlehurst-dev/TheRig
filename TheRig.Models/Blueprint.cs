@@ -7,5 +7,10 @@ namespace TheRig.Models
         public string Name { get; set; }
         public Computer Computer { get; set; }
 
+        public Blueprint()
+        {
+            Computer = new Computer();
+        }
+
     }
 }

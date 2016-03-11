@@ -1,7 +1,7 @@
 ﻿using System;
 using TheRig.UI.Controller;
 
-namespace TheRig.UI.Pages
+namespace TheRig.UI.Pages.Menus
 {
     public class AssemblyMenuPage : IPage
     {
@@ -20,8 +20,7 @@ namespace TheRig.UI.Pages
             Console.WriteLine("");
 
             Console.WriteLine("A:\tCreate a new PC Blueprint");
-            Console.WriteLine("B:\tReview and Add Compoents to the selected blueprint.");
-            Console.WriteLine("C:\tSelect a PC Blueprint");
+            Console.WriteLine("B:\tTo alter an existing blueprint.");
 
             Console.WriteLine("");
             Console.WriteLine("x: back to main menu.");
@@ -34,7 +33,7 @@ namespace TheRig.UI.Pages
             }
             if (key == "B" || key == "b")
             {
-                var page = (AssemblyMenuPage)_gameController.GamePages.Pages["AssemblyMenu"];
+                var page = (SelectMenuComponentsPage)_gameController.GamePages.Pages["Select-BlueprintComponents"];
                 _gameController.GamePages.ActivePage = page;
             }
             if (key == "C" || key == "c")

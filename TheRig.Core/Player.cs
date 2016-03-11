@@ -24,6 +24,7 @@ namespace TheRig.Core
             ComputerPool = new List<Computer>();
             HypeManager = new HypeManager();
             Advertising = new AdvertisingManager();
+            BlueprintManager = new BlueprintManager();
             Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
             {
                 StartDate = datetime.AddDays(7),

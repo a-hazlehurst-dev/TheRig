@@ -2,7 +2,7 @@ using System;
 using TheRig.UI.Controller;
 using TheRig.UI.Helper;
 
-namespace TheRig.UI.Pages
+namespace TheRig.UI.Pages.Menus
 {
     public class MainMenuPage : IPage
     {
