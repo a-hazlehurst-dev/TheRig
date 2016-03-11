@@ -21,6 +21,7 @@ namespace TheRig.UI.Pages.Menus
 
             Console.WriteLine("A:\tCreate a new PC Blueprint");
             Console.WriteLine("B:\tTo alter an existing blueprint.");
+            Console.WriteLine("C:\tPurchase supplies for Pc.");
 
             Console.WriteLine("");
             Console.WriteLine("x: back to main menu.");
@@ -38,7 +39,7 @@ namespace TheRig.UI.Pages.Menus
             }
             if (key == "C" || key == "c")
             {
-                var page = (AssemblyMenuPage)_gameController.GamePages.Pages["AssemblyMenu"];
+                var page = (PurchaseBlueprintSupplies)_gameController.GamePages.Pages["Purchase-BlueprintSupplies"];
                 _gameController.GamePages.ActivePage = page;
             }
             if (key == "X" || key == "x")

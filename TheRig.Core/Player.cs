@@ -18,6 +18,7 @@ namespace TheRig.Core
         public HypeManager HypeManager { get; set; }
 
         public CustomerManager CustomerManager { get; set; }
+        public FinanceManager FinanceManager { get; set; }
 
         public Player(DateTime datetime)
         {
@@ -25,6 +26,7 @@ namespace TheRig.Core
             HypeManager = new HypeManager();
             Advertising = new AdvertisingManager();
             BlueprintManager = new BlueprintManager();
+            FinanceManager = new FinanceManager(1000.0M);
             Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
             {
                 StartDate = datetime.AddDays(7),
@@ -67,6 +69,31 @@ namespace TheRig.Core
             HypeManager.Turn(gameDate, Advertising.Active);
             CustomerManager.Turn(gameDate);
 
+        }
+    }
+
+    public class FinanceManager
+    {
+        private decimal _funds = 0.0M;
+        public FinanceManager(decimal startFunds)
+        {
+            CreditFunds(startFunds);
+        }
+
+
+        public void CreditFunds(decimal funds)
+        {
+            _funds += funds;
+        }
+
+        public void DebitFunds(decimal funds)
+        {
+            _funds -= funds;
+        }
+
+        public decimal GetFunds()
+        {
+            return _funds;
         }
     }
 }

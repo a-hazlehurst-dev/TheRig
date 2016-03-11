@@ -212,11 +212,11 @@ namespace TheRig.UI.Pages
         public void MenuOptions()
         {
             Console.WriteLine("A: Change the selected blueprint.");
-            Console.WriteLine("B: Select Motherboard");
-            Console.WriteLine("C: Select Cpu");
-            Console.WriteLine("D: Select Ram");
-            Console.WriteLine("E: Select Graphics");
-            Console.WriteLine("F: Select Sound");
+            Console.WriteLine("B: Select Motherboard.");
+            Console.WriteLine("C: Select Cpu.");
+            Console.WriteLine("D: Select Ram.");
+            Console.WriteLine("E: Select Graphics.");
+            Console.WriteLine("F: Select Sound.");
             Console.WriteLine("X: Go back to previous screen.");
         }
 

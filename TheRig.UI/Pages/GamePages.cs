@@ -21,6 +21,7 @@ namespace TheRig.UI.Pages
             Pages.Add("Create-Blueprint", new CreateBlueprint(_displayController));
 
             Pages.Add("Select-BlueprintComponents", new SelectMenuComponentsPage(_displayController));
+            Pages.Add("Purchase-BlueprintSupplies", new PurchaseBlueprintSupplies(_displayController));
 
             ActivePage = Pages["MainMenu"];
         }
