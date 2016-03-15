@@ -24,7 +24,7 @@ namespace TheRig.UI.Pages.Menus
         {
             Title();
             MenuOptions();
-            MenuSelector();
+            MenuSelector(Console.ReadLine());
         }
 
         public void MenuOptions()
@@ -34,9 +34,8 @@ namespace TheRig.UI.Pages.Menus
             Console.WriteLine("X:\tBack to main menu.");
         }
 
-        public void MenuSelector()
+        public void MenuSelector(string key)
         {
-            var key = Console.ReadLine();
             if(key.Equals("A")|| key.Equals("a"))
             {
                 _gameController.GamePages.ActivePage = _gameController.GamePages.Pages["Transactions"];

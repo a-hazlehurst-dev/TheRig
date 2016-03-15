@@ -24,7 +24,7 @@ namespace TheRig.UI.Pages.Inventory
             Title();
             View();
             MenuOptions();
-            MenuSelector();
+            MenuSelector(Console.ReadLine());
         }
         public void View()
         {
@@ -42,9 +42,8 @@ namespace TheRig.UI.Pages.Inventory
             Console.WriteLine("X: to go back.");
         }
 
-        public void MenuSelector()
+        public void MenuSelector(string key)
         {
-            var key = Console.ReadLine();
             if(key.Equals("X")|| key.Equals("x"))
             {
                 Back();

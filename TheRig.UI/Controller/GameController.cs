@@ -32,6 +32,7 @@ namespace TheRig.UI.Controller
             GameDate = new DateTime(1990, 1,6);
             UnitOfWork = unitOfWork;
             _cityService = cityService;
+            _cityService.BuildNewCity(new CityConfiguration { Wealth = Wealth.Average, PopulationSize = PopulationSize.Medium });
             Player = new Player(GameDate);
             GamePages= new GamePages(this);
 
@@ -42,7 +43,7 @@ namespace TheRig.UI.Controller
             do
             {
                 Console.Clear();
-                _cityService.BuildNewCity(new CityConfiguration { Wealth = Wealth.Average, PopulationSize = PopulationSize.Medium});
+                
                 GamePages.ActivePage.Draw();
             }
             while (!_endGame);

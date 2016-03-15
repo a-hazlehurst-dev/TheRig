@@ -3,6 +3,6 @@
     public  interface IPageMenu
     {
         void MenuOptions();
-        void MenuSelector();
+        void MenuSelector(string option);
     }
 }

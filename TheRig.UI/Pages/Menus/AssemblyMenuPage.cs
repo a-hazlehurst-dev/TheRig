@@ -1,62 +1,42 @@
 ﻿using System;
 using TheRig.UI.Controller;
-using TheRig.UI.Pages.Interfaces;
-using TheRig.UI.Pages.Menus.Interfaces;
+using TheRig.UI.Pages.PageBinding;
 
 namespace TheRig.UI.Pages.Menus
 
 {
-    public class AssemblyMenuPage : IPage, IPageMenu
+    public class AssemblyMenuPage : BasePage
     {
-        private readonly GameController _gameController;
+        
 
-        public AssemblyMenuPage(GameController gameController)
+        public AssemblyMenuPage(GameController gameController, IPageBinding pageBinding) : base(gameController, pageBinding)
         {
-            _gameController = gameController;
-        }
 
-        public void Back()
-        {
-            _gameController.GoToMainMenu();
         }
-
-        public void Draw()
+        public override void Draw()
         {
             Title();
             MenuOptions();
-            MenuSelector();
+            MenuSelector(Console.ReadLine());
         }
 
-        public void MenuOptions()
+        public override void MenuOptions()
         {
             Console.WriteLine("A:\tCreate a new PC Blueprint");
             Console.WriteLine("B:\tTo alter an existing blueprint.");
-
-            Console.WriteLine("");
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("x: back to main menu.");
+            base.MenuOptions();
         }
 
-        public void MenuSelector()
+        public override void MenuSelector(string key)
         {
-            var key = Console.ReadLine();
-            if (key == "A" || key == "a")
-            {
-                var page = (CreateBlueprint)_gameController.GamePages.Pages["Create-Blueprint"];
-                _gameController.GamePages.ActivePage = page;
-            }
-            if (key == "B" || key == "b")
-            {
-                var page = (SelectMenuComponentsPage)_gameController.GamePages.Pages["Select-BlueprintComponents"];
-                _gameController.GamePages.ActivePage = page;
-            }
-            if (key == "X" || key == "x")
-            {
-                Back();            }
+            _pageBinding.ExecuteInput(key);
+
+            base.MenuSelector(key);
         }
 
-        public void Title()
+        public override void Title()
         {
+            base.Title();
             Console.WriteLine("Assembly Menu");
             Console.WriteLine("---------------------------");
         }

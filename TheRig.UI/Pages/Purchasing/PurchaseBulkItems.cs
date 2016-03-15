@@ -28,7 +28,7 @@ namespace TheRig.UI.Pages.Purchasing
         {
             Title();
             MenuOptions();
-            MenuSelector();
+            MenuSelector(Console.ReadLine());
         }
         public void Back()
         {
@@ -47,9 +47,8 @@ namespace TheRig.UI.Pages.Purchasing
             Console.WriteLine("X:\tBack To Purchasing menu.");
         }
 
-        public void MenuSelector()
+        public void MenuSelector(string key)
         {
-            var key = Console.ReadLine();
             if (key.Equals("A") || key.Equals("a"))
             {
                 ViewAndSelectMotherboards();
