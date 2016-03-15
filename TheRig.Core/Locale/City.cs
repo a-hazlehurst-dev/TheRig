@@ -1,12 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Security.Policy;
+using System.Threading;
 using TheRig.Core.Interfaces;
-using TheRig.Core.Managers;
 
 namespace TheRig.Core.Locale
 {
@@ -19,7 +16,7 @@ namespace TheRig.Core.Locale
         
         public City()
         {
-        
+            Regions = new List<Region>();
         }
 
 
@@ -65,8 +62,10 @@ namespace TheRig.Core.Locale
             for (int x = 0; x < cityConfiguration.Regions; x++)
             {
                 var regionConfiguration = new RegionConfiguration();
-                DetermineRegionWealth(regionConfiguration, cityConfiguration, 1, city.Regions);
-                DetermineRegionPopulation(regionConfiguration, cityConfiguration, 1, city.Regions);
+                DetermineRegionWealth(regionConfiguration, cityConfiguration, 0, city.Regions);
+                Thread.Sleep(12);
+                DetermineRegionPopulation(regionConfiguration, cityConfiguration, 0, city.Regions);
+                Thread.Sleep(11);
                 var region = _regionBuilder.BuildRegion(regionConfiguration);
                 city.Regions.Add(region);
             }
@@ -79,71 +78,86 @@ namespace TheRig.Core.Locale
         {
             var diceZone = new List<IntRange>();
             int max = 0;
+            var existingRegionModifier = 0;
             if (cityConfiguration.PopulationSize == PopulationSize.Tiny)
             {
-                var existingRegionModifier = 30 - (regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Tiny) * 5);
-
+                if (regions.Any())
+                {
+                    existingRegionModifier = 30 -(regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Tiny)*5);
+                }
                 diceZone.Add(new IntRange { Result = "Tiny", Min = 0, Max = 100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Small", Min = 101, Max = 75 });//75
-                diceZone.Add(new IntRange { Result = "Medium", Min = 176, Max = 225 }); //50
-                diceZone.Add(new IntRange { Result = "Large", Min = 226, Max = 250 }); //25
-                diceZone.Add(new IntRange { Result = "Huge", Min = 251, Max = 260 }); //10
+                diceZone.Add(new IntRange { Result = "Small", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Medium", Min = 176 - existingRegionModifier, Max = 225 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Large", Min = 226 - existingRegionModifier, Max = 250 - existingRegionModifier }); //25
+                diceZone.Add(new IntRange { Result = "Huge", Min = 251 - existingRegionModifier, Max = 260 - existingRegionModifier }); //10
                 max = 260 - existingRegionModifier;
             }
             else if(cityConfiguration.PopulationSize == PopulationSize.Small)
             {
-                var existingRegionModifier = 30 - (regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Small) * 5);
-
+                if (regions.Any())
+                {
+                    existingRegionModifier = 30 -(regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Small)*5);
+                }
                 diceZone.Add(new IntRange { Result = "Small", Min = 0, Max = 100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Tiny", Min = 101, Max = 175 });//75
-                diceZone.Add(new IntRange { Result = "Medium", Min = 176, Max = 250 }); //75
-                diceZone.Add(new IntRange { Result = "Large", Min = 251, Max = 300 }); //50
-                diceZone.Add(new IntRange { Result = "Huge", Min = 301, Max = 325 }); //25
+                diceZone.Add(new IntRange { Result = "Tiny", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Medium", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); //75
+                diceZone.Add(new IntRange { Result = "Large", Min = 251 - existingRegionModifier, Max = 300 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Huge", Min = 301 - existingRegionModifier, Max = 325 - existingRegionModifier }); //25
                 max = 325- existingRegionModifier;
             }
 
             else if (cityConfiguration.PopulationSize == PopulationSize.Medium)
             {
-                var existingRegionModifier = 30 - (regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Medium) * 5);
+                if (regions.Any())
+                {
+                    existingRegionModifier = 30 -(regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Medium)*5);
+                }
 
                 diceZone.Add(new IntRange { Result = "Medium", Min = 0, Max = 100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Small", Min = 101, Max = 175 });//75
-                diceZone.Add(new IntRange { Result = "Large", Min = 176, Max = 250 }); //75
-                diceZone.Add(new IntRange { Result = "Tiny", Min = 251, Max = 300 }); //50
-                diceZone.Add(new IntRange { Result = "Huge", Min = 301, Max = 350 }); //50
+                diceZone.Add(new IntRange { Result = "Small", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Large", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); //75
+                diceZone.Add(new IntRange { Result = "Tiny", Min = 251 - existingRegionModifier, Max = 300 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Huge", Min = 301 - existingRegionModifier, Max = 350 - existingRegionModifier }); //50
                 max = 350 - existingRegionModifier;
             }
             else if (cityConfiguration.PopulationSize == PopulationSize.Large)
             {
-                var existingRegionModifier = 30 - (regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Large) * 5);
+                if (regions.Any())
+                {
+                    existingRegionModifier = 30 -(regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Large)*5);
+                }
 
                 diceZone.Add(new IntRange { Result = "Large", Min = 0, Max = 100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Medium", Min = 101, Max = 175 });//75
-                diceZone.Add(new IntRange { Result = "Huge", Min = 176, Max = 250 }); //75
-                diceZone.Add(new IntRange { Result = "Small", Min = 251, Max = 300 }); //50
-                diceZone.Add(new IntRange { Result = "Tiny", Min = 301, Max = 325 }); //25
+                diceZone.Add(new IntRange { Result = "Medium", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Huge", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); //75
+                diceZone.Add(new IntRange { Result = "Small", Min = 251 - existingRegionModifier, Max = 300 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Tiny", Min = 301 - existingRegionModifier, Max = 325 - existingRegionModifier }); //25
                 max = 325 - existingRegionModifier;
             }
             else
             {
-                var existingRegionModifier = 30 - (regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Huge) * 5);
+                if (regions.Any())
+                {
+                    existingRegionModifier = 30 -(regions.Count(x => x.RegionConfiguration.PopulationSize == PopulationSize.Huge)*5);
+                }
 
                 diceZone.Add(new IntRange { Result = "Huge", Min = 0, Max = 100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Large", Min = 101, Max = 175 });//75
-                diceZone.Add(new IntRange { Result = "Medium", Min = 176, Max = 225 }); //50
-                diceZone.Add(new IntRange { Result = "Small", Min = 226, Max = 250 }); //25
-                diceZone.Add(new IntRange { Result = "Tiny", Min = 251, Max = 260 }); //10
+                diceZone.Add(new IntRange { Result = "Large", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Medium", Min = 176 - existingRegionModifier, Max = 225 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Small", Min = 226 - existingRegionModifier, Max = 250 - existingRegionModifier }); //25
+                diceZone.Add(new IntRange { Result = "Tiny", Min = 251 - existingRegionModifier, Max = 260 - existingRegionModifier }); //10
                 max = 260 - existingRegionModifier;
             }
 
-            Random rand = new Random(randomSeed);
+            Random rand = new Random();
             int results = rand.Next(0, max);
             string diceRole = "";
             foreach (var intRange in diceZone)
             {
-                if (results > intRange.Max && results <= intRange.Min)
+                if (results <= intRange.Max && results > intRange.Min)
                 {
                     diceRole = intRange.Result;
+                    break;
                 }
             }
 
@@ -175,72 +189,89 @@ namespace TheRig.Core.Locale
         {
             var diceZone = new List<IntRange>();
             int max = 0;
+            var existingRegionModifier = 0;
             if (cityConfiguration.Wealth == Wealth.Poverty)
             {
-                var existingRegionModifier = 30 - (cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Poverty)*5);
-
+                
+                if (cityRegions.Any())
+                {
+                    existingRegionModifier = 30 -(cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Poverty)*5);
+                }
                 diceZone.Add(new IntRange {Result = "Poverty", Min = 0,Max =100 - existingRegionModifier });//100
-                diceZone.Add(new IntRange { Result = "Poor", Min = 101, Max = 75 });//75
-                diceZone.Add(new IntRange { Result = "Average", Min = 176, Max = 225 }); //50
-                diceZone.Add(new IntRange { Result = "Prosperous", Min = 226, Max = 250 }); //25
-                diceZone.Add(new IntRange { Result = "Rich", Min = 251, Max = 260 }); //10
+                diceZone.Add(new IntRange { Result = "Poor", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier });//75
+                diceZone.Add(new IntRange { Result = "Average", Min = 176 - existingRegionModifier, Max = 225 - existingRegionModifier }); //50
+                diceZone.Add(new IntRange { Result = "Prosperous", Min = 226 - existingRegionModifier, Max = 250 - existingRegionModifier }); //25
+                diceZone.Add(new IntRange { Result = "Rich", Min = 251 - existingRegionModifier, Max = 260 - existingRegionModifier }); //10
                 max = 260 - existingRegionModifier;
             }
             else if (cityConfiguration.Wealth == Wealth.Poor)
             {
-                var existingRegionModifier = 30 - (cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Poor) * 5);
-
+                if (cityRegions.Any())
+                {
+                    existingRegionModifier = 30 -(cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Poor)*5);
+                }
                 diceZone.Add(new IntRange { Result = "Poor", Min = 0, Max =100 - existingRegionModifier }); //100
-                diceZone.Add(new IntRange { Result = "Poverty", Min = 101, Max =175 }); // 75
-                diceZone.Add(new IntRange { Result = "Average", Min = 176, Max = 250 }); // 75
-                diceZone.Add(new IntRange { Result = "Prosperous", Min = 251, Max = 275 }); // 25
-                diceZone.Add(new IntRange { Result = "Rich", Min = 276, Max = 300 }); //25
+                diceZone.Add(new IntRange { Result = "Poverty", Min = 101 - existingRegionModifier, Max =175 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Average", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Prosperous", Min = 251 - existingRegionModifier, Max = 275 - existingRegionModifier }); // 25
+                diceZone.Add(new IntRange { Result = "Rich", Min = 276 - existingRegionModifier, Max = 300 - existingRegionModifier }); //25
                 max = 300- existingRegionModifier;
             }
             else if (cityConfiguration.Wealth == Wealth.Average)
             {
-                var existingRegionModifier = 30 - (cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Average) * 5);
+                if (cityRegions.Any())
+                {
+                    existingRegionModifier = 30 -(cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Average)*5);
+                }
 
                 diceZone.Add(new IntRange { Result = "Average", Min = 0, Max = 100- existingRegionModifier }); //100
-                diceZone.Add(new IntRange { Result = "Poor", Min = 101, Max = 175 }); // 75
-                diceZone.Add(new IntRange { Result = "Prosperous", Min = 176, Max = 250 }); // 75
-                diceZone.Add(new IntRange { Result = "Poverty", Min = 251, Max = 275 }); // 25
-                diceZone.Add(new IntRange { Result = "Rich", Min = 276, Max = 300 }); //25
+                diceZone.Add(new IntRange { Result = "Poor", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Prosperous", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Poverty", Min = 251 - existingRegionModifier, Max = 275 - existingRegionModifier }); // 25
+                diceZone.Add(new IntRange { Result = "Rich", Min = 276 - existingRegionModifier, Max = 300 - existingRegionModifier }); //25
                 max = 300- existingRegionModifier;
             }
             else if (cityConfiguration.Wealth == Wealth.Prosperous)
             {
-                var existingRegionModifier = 30 - (cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Prosperous) * 5);
-                diceZone.Add(new IntRange { Result = "Prosperous", Min = 0, Max = 100- existingRegionModifier }); //100
-                diceZone.Add(new IntRange { Result = "Rich", Min = 101, Max = 175 }); // 75
-                diceZone.Add(new IntRange { Result = "Average", Min = 176, Max = 250 }); // 75
-                diceZone.Add(new IntRange { Result = "Poor", Min = 251, Max = 275 }); // 25
-                diceZone.Add(new IntRange { Result = "Poverty", Min = 276, Max = 300 }); //25
+                if (cityRegions.Any())
+                {
+                    existingRegionModifier = 30 -(cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Prosperous)*5);
+                }
+                diceZone.Add(new IntRange { Result = "Prosperous", Min = 0- existingRegionModifier, Max = 100- existingRegionModifier }); //100
+                diceZone.Add(new IntRange { Result = "Rich", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Average", Min = 176 - existingRegionModifier, Max = 250 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Poor", Min = 251 - existingRegionModifier, Max = 275 - existingRegionModifier }); // 25
+                diceZone.Add(new IntRange { Result = "Poverty", Min = 276 - existingRegionModifier, Max = 300 - existingRegionModifier }); //25
                 max = 300-existingRegionModifier;
             }
             else
             {
-                var existingRegionModifier = 30 - (cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Prosperous) * 5);
+                if (cityRegions.Any())
+                {
+                    existingRegionModifier = 30 -(cityRegions.Count(x => x.RegionConfiguration.Wealth == Wealth.Rich)*5);
+                }
+            
                 diceZone.Add(new IntRange { Result = "Rich", Min = 0, Max = 100 - existingRegionModifier }); //100
-                diceZone.Add(new IntRange { Result = "Prosperous", Min = 101, Max = 175 }); // 75
-                diceZone.Add(new IntRange { Result = "Average", Min = 176, Max = 225 }); // 50
-                diceZone.Add(new IntRange { Result = "Poor", Min = 226, Max = 250 }); // 25
-                diceZone.Add(new IntRange { Result = "Poverty", Min = 251, Max = 260 }); //10
+                diceZone.Add(new IntRange { Result = "Prosperous", Min = 101 - existingRegionModifier, Max = 175 - existingRegionModifier }); // 75
+                diceZone.Add(new IntRange { Result = "Average", Min = 176 - existingRegionModifier, Max = 225 - existingRegionModifier }); // 50
+                diceZone.Add(new IntRange { Result = "Poor", Min = 226 - existingRegionModifier, Max = 250 - existingRegionModifier }); // 25
+                diceZone.Add(new IntRange { Result = "Poverty", Min = 251 - existingRegionModifier, Max = 260 - existingRegionModifier }); //10
                 max = 300- existingRegionModifier;
             }
 
-            Random rand = new Random(randomSeed);
+            Random rand = new Random();
             int results = rand.Next(0, max);
             string diceRole = "";
             foreach (var intRange in diceZone)
             {
-                if (results > intRange.Max && results <= intRange.Min)
+                if (results > intRange.Min && results <= intRange.Max)
                 {
                     diceRole = intRange.Result;
+                    break;
                 }
             }
-
-            if (diceRole == "Povery")
+       
+            if (diceRole == "Poverty")
             {
                 regionConfiguration.Wealth = Wealth.Poverty;
             }
@@ -279,8 +310,6 @@ namespace TheRig.Core.Locale
             region.RegionConfiguration = regionConfiguration;
             return region;
         }
-
-        
     }
     
 
