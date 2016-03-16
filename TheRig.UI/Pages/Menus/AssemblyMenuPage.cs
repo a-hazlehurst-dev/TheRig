@@ -1,51 +1,44 @@
 ﻿using System;
 using TheRig.UI.Controller;
+using TheRig.UI.Pages.PageBinding;
 
 namespace TheRig.UI.Pages.Menus
-{
-    public class AssemblyMenuPage : IPage
-    {
-        private readonly GameController _gameController;
 
-        public AssemblyMenuPage(GameController gameController)
+{
+    public class AssemblyMenuPage : BasePage
+    {
+        
+
+        public AssemblyMenuPage(GameController gameController, IPageBinding pageBinding) : base(gameController, pageBinding)
         {
-            _gameController = gameController;
+
+        }
+        public override void Draw()
+        {
+            Title();
+            MenuOptions();
+            MenuSelector(Console.ReadLine());
         }
 
-
-        public void Draw()
+        public override void MenuOptions()
         {
-            Console.WriteLine("Blueprints");
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine("");
-
             Console.WriteLine("A:\tCreate a new PC Blueprint");
             Console.WriteLine("B:\tTo alter an existing blueprint.");
+            base.MenuOptions();
+        }
 
-            Console.WriteLine("");
-            Console.WriteLine("x: back to main menu.");
+        public override void MenuSelector(string key)
+        {
+            _pageBinding.ExecuteInput(key);
 
-            var key = Console.ReadLine();
-            if (key == "A" || key == "a")
-            {
-                var page = (CreateBlueprint)_gameController.GamePages.Pages["Create-Blueprint"];
-                _gameController.GamePages.ActivePage = page;
-            }
-            if (key == "B" || key == "b")
-            {
-                var page = (SelectMenuComponentsPage)_gameController.GamePages.Pages["Select-BlueprintComponents"];
-                _gameController.GamePages.ActivePage = page;
-            }
-            if (key == "C" || key == "c")
-            {
-                var page = (AssemblyMenuPage)_gameController.GamePages.Pages["AssemblyMenu"];
-                _gameController.GamePages.ActivePage = page;
-            }
-            if (key == "X" || key == "x")
-            {
-                _gameController.GoToMainMenu();
-            }
+            base.MenuSelector(key);
+        }
 
+        public override void Title()
+        {
+            base.Title();
+            Console.WriteLine("Assembly Menu");
+            Console.WriteLine("---------------------------");
         }
     }
 }

@@ -44,6 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\UITitleHelper.cs" />
+    <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\CityViewPage.cs" />
+    <Compile Include="Pages\Finance\TransactionPage.cs" />
+    <Compile Include="Pages\Interfaces\IPage.cs" />
+    <Compile Include="Pages\Interfaces\IPageMenu.cs" />
+    <Compile Include="Pages\IPageBuilder.cs" />
+    <Compile Include="Pages\Menus\CityMenuPage.cs" />
+    <Compile Include="Pages\Menus\FinanceMenuPage.cs" />
+    <Compile Include="Pages\Menus\InventoryMenuPage.cs" />
     <Compile Include="Pages\Menus\AssemblyMenuPage.cs" />
     <Compile Include="Pages\Menus\MarketingMenuPage.cs" />
     <Compile Include="Pages\CreateBlueprint.cs" />
@@ -54,8 +63,14 @@
     <Compile Include="Pages\FindComputersPage.cs" />
     <Compile Include="Pages\GamePages.cs" />
     <Compile Include="Pages\Menus\MainMenuPage.cs" />
-    <Compile Include="Pages\PickComputerComponents.cs" />
-    <Compile Include="Pages\IPage.cs" />
+    <Compile Include="Pages\Menus\PurchasingMenuPage.cs" />
+    <Compile Include="Pages\PageBinding\AssemblyPageBinding.cs" />
+    <Compile Include="Pages\PageBinding\CityMenuPageBinding.cs" />
+    <Compile Include="Pages\PageBinding\CityViewPageBinding.cs" />
+    <Compile Include="Pages\PageBinding\IPageBinding.cs" />
+    <Compile Include="Pages\PageBinding\MainMenuPageBinding.cs" />
+    <Compile Include="Pages\Purchasing\PurchaseBlueprintSupplies.cs" />
+    <Compile Include="Pages\Purchasing\PurchaseBulkItems.cs" />
     <Compile Include="Pages\SelectMenuComponentsPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,7 +79,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\Inventory\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheRig.Core\TheRig.Core.csproj">
       <Project>{ad81f9a4-7a49-4cdc-a372-ea9073b4f832}</Project>

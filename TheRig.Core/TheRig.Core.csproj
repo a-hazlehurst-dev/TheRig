@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Locale\City.cs" />
     <Compile Include="Managers\AdvertisingManager.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
     <Compile Include="Managers\BlueprintManager.cs" />
@@ -56,6 +57,9 @@
     <Compile Include="Interfaces\Repositories\IMotherboardRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRamRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISoundRepository.cs" />
+    <Compile Include="Managers\InventoryManager.cs" />
+    <Compile Include="Managers\PurchasingManager.cs" />
+    <Compile Include="Managers\TransactionManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

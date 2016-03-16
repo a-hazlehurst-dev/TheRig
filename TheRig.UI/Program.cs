@@ -1,4 +1,5 @@
 ﻿using TheRig.Core;
+using TheRig.Core.Locale;
 using TheRig.Data;
 using TheRig.Data.Providers;
 using TheRig.UI.Controller;
@@ -11,7 +12,7 @@ namespace ConsoleApplication1
         {
             var dp = new DataProvider();
             var unitOfWork = new UnitOfWork(dp);
-            var displayController = new GameController(unitOfWork);
+            var displayController = new GameController(unitOfWork, new CityService(new CityBuilder(new RegionBuilder())));
             displayController.Start();
 
             

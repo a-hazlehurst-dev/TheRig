@@ -1,7 +1,7 @@
 ﻿using System;
 using TheRig.Core.Managers;
 using TheRig.UI.Controller;
-using TheRig.UI.Helper;
+using TheRig.UI.Pages.Interfaces;
 
 namespace TheRig.UI.Pages.Menus
 {
@@ -20,7 +20,6 @@ namespace TheRig.UI.Pages.Menus
 
         public void Draw()
         {
-            UiTitleHelper.DrawAdvertismentTitle(_gameController);
             Console.WriteLine("Active Advertising Campaigns");
             Console.WriteLine("------------------------");
             foreach (var advertisingCampaign in _advertisingManager.Active)
@@ -74,9 +73,20 @@ namespace TheRig.UI.Pages.Menus
             var key = Console.ReadKey();
             if (key.Key == ConsoleKey.X)
             {
-                _gameController.GoToMainMenu();
+                Back();   
             }
 
+        }
+
+        public void Title()
+        {
+            Console.WriteLine("Marketing Main Menu");
+            Console.WriteLine("--------------------------");
+        }
+
+        public void Back()
+        {
+            _gameController.GoToMainMenu();
         }
     }
 }

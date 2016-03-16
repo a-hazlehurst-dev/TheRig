@@ -1,6 +1,7 @@
 ﻿using System;
 using TheRig.Core;
 using TheRig.Core.Interfaces;
+using TheRig.Core.Locale;
 using TheRig.UI.Pages;
 
 namespace TheRig.UI.Controller
@@ -24,11 +25,14 @@ namespace TheRig.UI.Controller
         public GamePages GamePages { get; set; }
         public Player Player { get; set; } 
         public DateTime GameDate { get; set; }
+        private readonly  CityService _cityService;
 
-        public GameController(IUnitOfWork unitOfWork)
+        public GameController(IUnitOfWork unitOfWork, CityService cityService)
         {
             GameDate = new DateTime(1990, 1,6);
             UnitOfWork = unitOfWork;
+            _cityService = cityService;
+            _cityService.BuildNewCity(new CityConfiguration { Wealth = Wealth.Average, PopulationSize = PopulationSize.Medium });
             Player = new Player(GameDate);
             GamePages= new GamePages(this);
 
@@ -39,10 +43,16 @@ namespace TheRig.UI.Controller
             do
             {
                 Console.Clear();
+                
                 GamePages.ActivePage.Draw();
             }
             while (!_endGame);
             End();
+        }
+
+        public City GetCity()
+        {
+            return _cityService.City;
         }
 
         public void End()
