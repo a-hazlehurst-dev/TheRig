@@ -3,14 +3,15 @@ using TheRig.Core.Interfaces;
 
 namespace TheRig.Core
 {
-    public class CustomerHypeMeter : IMeter
+    public class Meter : IMeter
     {
-        public CustomerHypeMeter(float min, float max, float current, string name)
+        public Meter(float min, float max, float current, string name, int group)
         {
             Max = max;
             Min = min;
             Current = current;
             Name = name;
+            Group = group;
         }
 
         public float Max { get; private set; }
@@ -42,5 +43,6 @@ namespace TheRig.Core
             }
         }
         public string Name { get; }
+        public int Group { get;  }
     }
 }

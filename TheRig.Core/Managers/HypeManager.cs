@@ -6,19 +6,19 @@ namespace TheRig.Core.Managers
 {
     public class HypeManager
     {
-        public List<CustomerHypeMeter> HypeMeters { get; set; }
+        public List<Meter> HypeMeters { get; set; }
 
         public HypeManager()
         {
-            HypeMeters = new List<CustomerHypeMeter>
+            HypeMeters = new List<Meter>
             {
-                new CustomerHypeMeter(-100,100 ,0, "Kids"),
-                new CustomerHypeMeter(-100, 100, 0, "Youths"),
-                new CustomerHypeMeter(-100, 100, 0, "Young Adults"),
-                new CustomerHypeMeter(-100, 100, 0, "Adults"),
-                new CustomerHypeMeter(-100, 100, 0, "Middle Aged"),
-                new CustomerHypeMeter(-100, 100, 0, "Veteran"),
-                new CustomerHypeMeter(-100, 100, 0, "Retired"),
+                new Meter(-100,100 ,0, "Kids"),
+                new Meter(-100, 100, 0, "Youths"),
+                new Meter(-100, 100, 0, "Young Adults"),
+                new Meter(-100, 100, 0, "Adults"),
+                new Meter(-100, 100, 0, "Middle Aged"),
+                new Meter(-100, 100, 0, "Veteran"),
+                new Meter(-100, 100, 0, "Retired"),
             };
         }
 

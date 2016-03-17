@@ -1,5 +1,7 @@
 ﻿using TheRig.Core;
 using TheRig.Core.Locale;
+using TheRig.Core.Locale.Builders;
+using TheRig.Core.Services;
 using TheRig.Data;
 using TheRig.Data.Providers;
 using TheRig.UI.Controller;
