@@ -2,6 +2,10 @@
 using TheRig.Core;
 using TheRig.Core.Interfaces;
 using TheRig.Core.Locale;
+using TheRig.Core.Locale.Configurations;
+using TheRig.Core.Locale.Enums;
+using TheRig.Core.Managers;
+using TheRig.Core.Services;
 using TheRig.UI.Pages;
 
 namespace TheRig.UI.Controller
@@ -32,7 +36,7 @@ namespace TheRig.UI.Controller
             GameDate = new DateTime(1990, 1,6);
             UnitOfWork = unitOfWork;
             _cityService = cityService;
-            _cityService.BuildNewCity(new CityConfiguration { Wealth = Wealth.Average, PopulationSize = PopulationSize.Medium });
+            _cityService.BuildNewCity(new CityConfiguration { Wealth = WealthEnum.Average, PopulationSize = PopulationSizeEnum.Medium });
             Player = new Player(GameDate);
             GamePages= new GamePages(this);
 

@@ -40,13 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Locale\Builders\CityBuilder.cs" />
+    <Compile Include="Locale\Builders\RegionBuilder.cs" />
+    <Compile Include="Locale\Configurations\CityConfiguration.cs" />
+    <Compile Include="Locale\Configurations\RegionConfiguration.cs" />
+    <Compile Include="Locale\Enums\PopulationDenstiyEnum.cs" />
+    <Compile Include="Locale\Enums\PopulationSizeEnum.cs" />
+    <Compile Include="Locale\Enums\RegionTypes.cs" />
+    <Compile Include="Locale\Enums\WealthEnum.cs" />
+    <Compile Include="Locale\Interfaces\ICityBuilder.cs" />
     <Compile Include="Locale\City.cs" />
+    <Compile Include="Locale\Region.cs" />
     <Compile Include="Managers\AdvertisingManager.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
     <Compile Include="Managers\BlueprintManager.cs" />
     <Compile Include="Managers\CustomerManager.cs" />
     <Compile Include="Managers\HypeManager.cs" />
-    <Compile Include="CustomerHypeMeter.cs" />
+    <Compile Include="Meter.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Interfaces\IDataProvider.cs" />
@@ -62,6 +72,7 @@
     <Compile Include="Managers\TransactionManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CityService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheRig.Models\TheRig.Models.csproj">

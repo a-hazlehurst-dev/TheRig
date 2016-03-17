@@ -7,5 +7,6 @@
         float Current { get; set; }
         void Change(float value);
         string Name { get; }
+        int Group { get; }
     }
 }
