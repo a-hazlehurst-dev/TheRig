@@ -36,7 +36,7 @@ namespace TheRig.UI.Controller
             GameDate = new DateTime(1990, 1,6);
             UnitOfWork = unitOfWork;
             _cityService = cityService;
-            _cityService.BuildNewCity(new CityConfiguration { Wealth = WealthEnum.Average, PopulationSize = PopulationSizeEnum.Medium });
+            _cityService.BuildNewCity(new CityConfiguration { Wealth = WealthEnum.Average, PopulationSize = PopulationSizeEnum.Medium});
             Player = new Player(GameDate);
             GamePages= new GamePages(this);
 
@@ -75,6 +75,7 @@ namespace TheRig.UI.Controller
         public void Turn()
         {
             GameDate = GameDate.AddDays(7);
+            _cityService.Turn();
             Player.Turn(GameDate);
         }
     }

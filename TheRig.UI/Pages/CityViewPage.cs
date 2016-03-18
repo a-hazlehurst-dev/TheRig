@@ -33,8 +33,21 @@ namespace TheRig.UI.Pages
             {
                 Console.WriteLine("\t--------------------------------------------");
                 Console.WriteLine("\tName: " + region.Name);
-                Console.Write("\tSize:\t" + region.RegionConfiguration.PopulationSize+"\t\t");
-                Console.WriteLine("Wealth:\t" + region.RegionConfiguration.Wealth);
+                Console.Write("\tSize: " + region.RegionConfiguration.PopulationSize+"\t");
+                Console.Write("Type: " + region.RegionConfiguration.Type + "\t");
+                Console.WriteLine("Wealth :" + region.RegionConfiguration.Wealth);
+                Console.WriteLine();
+
+                Console.Write("\tLast Week's Demand\t{ " + region.PreviousWeek.CustomersCreated + " }");
+                Console.Write("\tCustomers:" + region.PreviousWeek.AwareCustomers);
+                Console.WriteLine();
+
+                Console.Write("\tThis Week's Demand\t{ " + region.ThisWeek.CustomersCreated + " }");
+                Console.Write("\tCustomers:" + region.ThisWeek.AwareCustomers);
+                Console.WriteLine();
+
+                Console.Write("\tForecasted Demand\t{ " + region.Forecast.CustomersCreated + " }");
+                Console.Write("\tCustomers:" + region.Forecast.AwareCustomers);
                 Console.WriteLine();
             }
             MenuOptions();

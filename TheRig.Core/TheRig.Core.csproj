@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClassLibrary3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RandomNumber.1.0.3\lib\net451\ClassLibrary3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\CustomerGenerator.cs" />
     <Compile Include="Locale\Builders\CityBuilder.cs" />
     <Compile Include="Locale\Builders\RegionBuilder.cs" />
     <Compile Include="Locale\Configurations\CityConfiguration.cs" />
@@ -55,6 +60,7 @@
     <Compile Include="Builders\MotherboardBuilder.cs" />
     <Compile Include="Managers\BlueprintManager.cs" />
     <Compile Include="Managers\CustomerManager.cs" />
+    <Compile Include="Managers\FinanceManager.cs" />
     <Compile Include="Managers\HypeManager.cs" />
     <Compile Include="Meter.cs" />
     <Compile Include="Managers\GameManager.cs" />
@@ -83,6 +89,9 @@
       <Project>{9e7eda68-3b04-4852-ac03-3bcc50076e28}</Project>
       <Name>TheRig.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

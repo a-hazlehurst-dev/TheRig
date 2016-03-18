@@ -24,21 +24,7 @@ namespace TheRig.Core.Managers
 
         private int DetermineNumberOfCustomersToCreate()
         {
-            var hypePower = _hypeManager.GetTotalHype();
-            if (hypePower > 0 && hypePower < 100)
-            {
-                return _random.Next(10, 50);
-            }
-            if (hypePower > 99 && hypePower < 200)
-            {
-                return _random.Next(40, 120);
-            }
-            if (hypePower > 199 && hypePower < 300)
-            {
-                return _random.Next(80, 150);
-            }
-
-            return 0;
+            return 1;
         }
 
         private void CreateCustomers()

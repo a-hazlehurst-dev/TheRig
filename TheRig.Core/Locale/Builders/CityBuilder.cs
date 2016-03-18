@@ -1,13 +1,10 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using TheRig.Core.Locale.Configurations;
 using TheRig.Core.Locale.Enums;
 using TheRig.Core.Locale.Interfaces;
-using TheRig.Core.Managers;
 using TheRig.Models;
 
 namespace TheRig.Core.Locale.Builders
@@ -32,10 +29,10 @@ namespace TheRig.Core.Locale.Builders
                 Thread.Sleep(12);
                 DetermineRegionPopulation(regionConfiguration, cityConfiguration, 0, city.Regions);
                 Thread.Sleep(11);
+                GetDistrictType(regionConfiguration, city.Regions);
                 var region = _regionBuilder.BuildRegion(regionConfiguration);
                 city.Regions.Add(region);
             }
-
             city.CityConfiguration = cityConfiguration;
             return city;
         }
@@ -259,5 +256,57 @@ namespace TheRig.Core.Locale.Builders
             }
         }
 
+        private void GetDistrictType(RegionConfiguration regionConfiguration,  List<Region> cityRegions)
+        {
+            int resCount = 0;
+            int indCount = 0;
+            int comCount = 0;
+
+            foreach (var region in cityRegions)
+            {
+                if (region.RegionConfiguration.Type == RegionTypes.Residential)
+                {
+                    resCount++;
+                }
+                if (region.RegionConfiguration.Type == RegionTypes.Commercial)
+                {
+                    comCount++;
+                }
+                if (region.RegionConfiguration.Type == RegionTypes.Industrial)
+                {
+                    indCount++;
+                }
+            }
+
+            if (resCount == 0)
+            {
+                regionConfiguration.Type = RegionTypes.Residential;
+                return;
+            }
+            if (comCount == 0)
+            {
+                regionConfiguration.Type = RegionTypes.Commercial;
+                return;
+            }
+            if (indCount == 0)
+            {
+                regionConfiguration.Type = RegionTypes.Industrial;
+                return;
+            }
+
+            int random = RandomNumber.Randomness.getNextInt(1, 3);
+            if (random == 1)
+            {
+                regionConfiguration.Type = RegionTypes.Residential;
+            }
+            if (random == 2)
+            {
+                regionConfiguration.Type = RegionTypes.Industrial;
+            }
+            if (random == 3)
+            {
+                regionConfiguration.Type = RegionTypes.Commercial;
+            }
+        }
     }
 }
