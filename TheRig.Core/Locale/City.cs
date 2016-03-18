@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using TheRig.Core.Interfaces;
 using TheRig.Core.Locale.Configurations;
 
 namespace TheRig.Core.Locale

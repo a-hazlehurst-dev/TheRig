@@ -1,162 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using TheRig.Core.Interfaces;
 
 namespace TheRig.Core.Managers
 {
     public class HypeManager
     {
-        public List<Meter> HypeMeters { get; set; }
+        public List<IMeter> Meters { get; set; }
+        public List<IMeter> General
+        {
+            get
+            {
+                return Meters.Where(x => x.Group == 1).ToList();
+            }
+        }
+        public List<IMeter> Gender
+        {
+            get
+            {
+                return Meters.Where(x => x.Group == 2).ToList();
+            }
+        }
+        public List<IMeter> Age
+        {
+            get
+            {
+                return Meters.Where(x => x.Group == 3).ToList();
+            }
+        }
+        public List<IMeter> Occupation
+        {
+            get
+            {
+                return Meters.Where(x => x.Group == 4).ToList();
+            }
+        }
 
         public HypeManager()
         {
-            HypeMeters = new List<Meter>
+            Meters = new List<IMeter>
             {
-                new Meter(-100,100 ,0, "Kids"),
-                new Meter(-100, 100, 0, "Youths"),
-                new Meter(-100, 100, 0, "Young Adults"),
-                new Meter(-100, 100, 0, "Adults"),
-                new Meter(-100, 100, 0, "Middle Aged"),
-                new Meter(-100, 100, 0, "Veteran"),
-                new Meter(-100, 100, 0, "Retired"),
+
+                new Meter(0, 1000,0, "Awareness",1 ), //n# customers
+                new Meter(-100, 100, 0, "Reputation",1), // n# customers
+
+                new Meter(0, 100, 0, "Male", 2), // type of customers
+                new Meter(0, 100, 0, "Female",2), // type of customers
+
+                new Meter(0, 100, 0, "Child", 3),
+                new Meter(0, 100, 0, "Youth", 3),
+                new Meter(0, 100, 0, "Young Adult", 3),
+                new Meter(0, 100, 0, "Adult", 3),
+                new Meter(0, 100, 0, "Middle Aged", 3),
+                new Meter(0, 100, 0, "Veteran", 3),
+                new Meter(0, 100, 0, "Retired", 3),
+
+                new Meter(0, 100, 0, "Student", 4),
+                new Meter(0, 100, 0, "IT", 4),
+                new Meter(0, 100, 0, "Photographer", 4),
+                new Meter(0, 100, 0, "Doctor", 4),
+                new Meter(0, 100, 0, "Teacher", 4),
+                new Meter(0, 100, 0, "Unemployed", 4),
+                new Meter(0, 100, 0, "Entreprenour", 4),
+                new Meter(0, 100, 0, "Scientist", 4),
+                new Meter(0, 100, 0, "Clerk", 4),
+                new Meter(0, 100, 0, "Farmer", 4)
+
             };
         }
 
-
-        private void ProcessAdvertisingHype(List<AdvertisingCampaign> campaigns)
+        public void Turn()
         {
 
-            if (campaigns.Any(x => x.Status == AdvertisingStatus.Active))
-            {
-                var activeCampaigns = campaigns.Where(x => x.Status == AdvertisingStatus.Active);
-                foreach (var campaign in activeCampaigns)
-                {
-                    ChangeHypeMeter(campaign.Primary.Name, 2);
-                    
-                    foreach (var demographic in campaign.Secondary)
-                    {
-                       ChangeHypeMeter(demographic.Name, .8f);
-                    }
-                }
-            }
-        }
-
-        private void ChangeHypeMeter(string name, float value)
-        {
-            var hypeMeter = HypeMeters.SingleOrDefault(x => x.Name == name);
-            if (hypeMeter != null)
-            {
-                hypeMeter.Change(value);
-            }
-        }
-
-        public void Turn(DateTime gameDate, List<AdvertisingCampaign> campaigns)
-        {
-            ProcessAdvertisingHype(campaigns);
-            ProcessNaturalDecay();
-        }
-
-        private void ProcessNaturalDecay()
-        {
-            foreach (var hypeMeter in HypeMeters)
-            {
-                var decayRate = (hypeMeter.Current/125)*-1;
-                hypeMeter.Change(decayRate);
-            }
-        }
-
-        public double GetTotalHype()
-        {
-            return  HypeMeters.Sum(x => x.Current);
         }
     }
-    
-
-    public class Demographic
-    {
-        public string Name { get; set; }
-
-    }
-
-    public class AdvertisingCampaign
-    {
-        public AdvertisingCampaign()
-        {
-        }
-
-
-        public Demographic Primary { get;  set; }
-        public List<Demographic> Secondary { get;  set; }
-        public AdvertisingFunding Funding { get;  set; }
-        public DateTime StartDate { get;  set; }
-        public DateTime EndDate { get;  set; }
-        public AdvertisingStatus Status { get; set; }
-    }
-
-    public class AdvertisingFunding
-    {
-        public AdvertisingFunding(float funding)
-        {
-            
-        }
-        public  FundingLevel FundingLevel { get; set; }
-        public float CostPerDay { get;  }
-    }
-
-    public enum FundingLevel
-    {
-        Low,
-        Standard,
-        High,
-        Extreme
-    }
-
-    public enum AdvertisingStatus
-    {
-        Scheduled,
-        Active,
-        Cancelled,
-        Completed
-    }
-
-    public class Region
-    {
-        public string Name { get; set; }
-        public int BaseCustomers { get; set; }
-        public RegionDemographic Demographic { get; set; }
-        public HypeManager Hype { get; set; }
-    }
-
-    public class RegionDemographic
-    {
-        public Wealth Wealth { get; set; }
-        public Type Type { get; set; }
-        
-        
-    }
-
-    public enum Wealth
-    {
-        Poor,
-        Low,
-        Average,
-        Good,
-        Wealthy,
-        Rich
-        
-    }
-
-    public enum Type
-    {
-        Residential,
-        Commercial,
-        Industrial
-    }
-
-
-    public class BalanceScale
-    {
-        
-    }
-
 }

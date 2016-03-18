@@ -58,6 +58,7 @@
     <Compile Include="Components\Sockets\SoundSocket.cs" />
     <Compile Include="Components\Sockets\SoundSocketArray.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="CustomerInfo.cs" />
     <Compile Include="IntRange.cs" />
     <Compile Include="Maps\TileGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

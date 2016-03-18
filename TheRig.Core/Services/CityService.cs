@@ -1,4 +1,5 @@
-﻿using TheRig.Core.Locale;
+﻿using TheRig.Core.Builders;
+using TheRig.Core.Locale;
 using TheRig.Core.Locale.Configurations;
 using TheRig.Core.Locale.Interfaces;
 
@@ -20,6 +21,16 @@ namespace TheRig.Core.Services
         {
             CityConfiguration = cityConfiguration;
             City = _cityBuilder.Build(CityConfiguration);
+        }
+
+
+        public void Turn()
+        {
+            var customerGenerator = new CustomerGenerator();
+            foreach (var region in City.Regions)
+            {
+                customerGenerator.GetCustomers(region);
+            }
         }
     }
 

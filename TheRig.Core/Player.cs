@@ -32,30 +32,6 @@ namespace TheRig.Core
             FinanceManager = new FinanceManager(1000.0M);
             InventoryManager = new InventoryManager();
             PurchasingManager = new PurchasingManager(FinanceManager, InventoryManager);
-
-            Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
-            {
-                StartDate = datetime.AddDays(7),
-                EndDate = datetime.AddMonths(6),
-                Primary = new Demographic { Name ="Youths"},
-                Secondary = new List<Demographic>
-                {
-                    new Demographic { Name ="Kids" }
-                }
-            });
-            Advertising.AddAdvertisingCampaign(new AdvertisingCampaign
-            {
-                StartDate = datetime.AddDays(7),
-                EndDate = datetime.AddMonths(8),
-                Primary = new Demographic { Name = "Adults" },
-                Secondary = new List<Demographic>
-                {
-                    new Demographic { Name ="Kids" },
-                    new Demographic { Name ="Retired" },
-                    new Demographic { Name ="Youths" },
-                }
-            });
-            ActiveComputerName = "Not Set.";
             CustomerManager = new CustomerManager(HypeManager);
         }
 
@@ -71,39 +47,9 @@ namespace TheRig.Core
 
         public void Turn(DateTime gameDate)
         {
-            Advertising.Turn(gameDate);
-            HypeManager.Turn(gameDate, Advertising.Active);
             CustomerManager.Turn(gameDate);
-
         }
     }
 
-    public class FinanceManager
-    {
-        private decimal _funds = 0.0M;
-        public TransactionManager TransactionManager { get; private set; }
-        public FinanceManager(decimal startFunds)
-        {
-            TransactionManager = new TransactionManager();
-            CreditFunds(new Transaction { Name = "Start up", Value = startFunds, DateCreated = GameState.Instance.GameTime, Quantity = 1 });
-        }
-
-
-        public void CreditFunds(Transaction transaction)
-        {
-            _funds += transaction.Value;
-            TransactionManager.Add(transaction);
-        }
-
-        public void DebitFunds(Transaction transaction)
-        {
-            _funds -= transaction.Value;
-            TransactionManager.Add(transaction);
-        }
-
-        public decimal GetFunds()
-        {
-            return _funds;
-        }
-    }
+    
 }
