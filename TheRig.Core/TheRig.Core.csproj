@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\CustomerGenerator.cs" />
+    <Compile Include="Configuration\DataConfiguration.cs" />
+    <Compile Include="Configuration\GamePreferences.cs" />
+    <Compile Include="Configuration\GameplayConfiguration.cs" />
+    <Compile Include="Configuration\GraphicsConfiguration.cs" />
+    <Compile Include="Configuration\SoundConfiguration.cs" />
+    <Compile Include="Interfaces\IGameManager.cs" />
     <Compile Include="Locale\Builders\CityBuilder.cs" />
     <Compile Include="Locale\Builders\RegionBuilder.cs" />
     <Compile Include="Locale\Configurations\CityConfiguration.cs" />
@@ -64,7 +70,7 @@
     <Compile Include="Managers\HypeManager.cs" />
     <Compile Include="Meter.cs" />
     <Compile Include="Managers\GameManager.cs" />
-    <Compile Include="GameState.cs" />
+    <Compile Include="GlobalState.cs" />
     <Compile Include="Interfaces\IDataProvider.cs" />
     <Compile Include="Interfaces\IMeter.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
