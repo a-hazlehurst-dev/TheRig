@@ -11,16 +11,14 @@ namespace TheRig.Core
     {
         public string ActiveComputerName { get; set; }
         public List<Computer> ComputerPool { get; set; }
-
         public BlueprintManager BlueprintManager { get; set; }
-
         public AdvertisingManager Advertising { get; set; }
         public HypeManager HypeManager { get; set; }
-
         public CustomerManager CustomerManager { get; set; }
         public FinanceManager FinanceManager { get; set; }
         public PurchasingManager PurchasingManager { get; set; }
         public InventoryManager InventoryManager { get; set; }
+
 
         public Player(DateTime datetime)
         {
