@@ -113,27 +113,27 @@ namespace TheRig.UI.Pages
         private void SelectCpu()
         {
             DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.UnitOfWork.CpuRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.CpuRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
             _blueprint.Computer.Motherboard.CpuSocketArray.Add(item);
         }
         private void SelectSound()
         {
             DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.UnitOfWork.SoundRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.SoundRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
             _blueprint.Computer.Motherboard.SoundSocketArray.Add(item);
         }
 
         private void SelectGraphics()
         {
             DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.UnitOfWork.GraphicsRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.GraphicsRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
             _blueprint.Computer.Motherboard.GraphicSocketArray.Add(item);
         }
 
         private void SelectRam()
         {
             DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.UnitOfWork.RamRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.RamRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
             _blueprint.Computer.Motherboard.RamSocketArray.Add(item);
         }
 
@@ -143,7 +143,7 @@ namespace TheRig.UI.Pages
             {
                 Console.WriteLine("You must select a motherboard first.");
                 DisplayHelper helper = new DisplayHelper();
-                var item =helper.SelectableList(_gameController.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
+                var item =helper.SelectableList(_gameController.GameManager.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
                 _blueprint.Computer.Motherboard = (Motherboard)item;
             }
             
@@ -151,7 +151,7 @@ namespace TheRig.UI.Pages
 
         private void DisplayAndSelectBlueprint()
         {
-            if (_gameController.Player.BlueprintManager.Blueprints.Any())
+            if (_gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Any())
             {
                 bool repeat = true;
                 do
@@ -160,7 +160,7 @@ namespace TheRig.UI.Pages
 
                     Console.WriteLine("please select a blue print.");
                     var count = 1;
-                    foreach (var bp in _gameController.Player.BlueprintManager.Blueprints)
+                    foreach (var bp in _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1))
                     {
                         Console.WriteLine(count + ", " + bp.Name);
                         count++;
@@ -170,7 +170,7 @@ namespace TheRig.UI.Pages
                     if (int.TryParse(selectedVal, out val))
                     {
                         repeat = false;
-                        if (val > 0 && val <= _gameController.Player.BlueprintManager.Blueprints.Count)
+                        if (val > 0 && val <= _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Count())
                         {
                             _blueprint = _gameController.Player.BlueprintManager.SelectedBlueprint = _gameController.Player.BlueprintManager.Blueprints.ElementAt(val - 1);
                         }

@@ -60,7 +60,6 @@
     <Compile Include="Pages\CreditsPage.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Helper\DisplayHelper.cs" />
-    <Compile Include="Pages\FindComputersPage.cs" />
     <Compile Include="Pages\GamePages.cs" />
     <Compile Include="Pages\Menus\MainMenuPage.cs" />
     <Compile Include="Pages\Menus\PurchasingMenuPage.cs" />

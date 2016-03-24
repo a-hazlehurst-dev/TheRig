@@ -1,6 +1,9 @@
 ﻿using TheRig.Core;
+using TheRig.Core.Configuration;
+using TheRig.Core.Interfaces;
 using TheRig.Core.Locale;
 using TheRig.Core.Locale.Builders;
+using TheRig.Core.Managers;
 using TheRig.Core.Services;
 using TheRig.Data;
 using TheRig.Data.Providers;
@@ -14,7 +17,10 @@ namespace ConsoleApplication1
         {
             var dp = new DataProvider();
             var unitOfWork = new UnitOfWork(dp);
-            var displayController = new GameController(unitOfWork, new CityService(new CityBuilder(new RegionBuilder())));
+            var preferences = new GamePreferences();
+            var gameManager = new GameManager(unitOfWork, preferences);
+
+            var displayController = new GameController(gameManager);
             displayController.Start();
 
             

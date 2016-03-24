@@ -22,6 +22,7 @@ namespace TheRig.Core.Managers
 
     public class Transaction
     {
+        public int Owner { get; set; }
         public string Name { get; set; }
         public DateTime DateCreated { get; set; }
         public int Quantity { get; set; }

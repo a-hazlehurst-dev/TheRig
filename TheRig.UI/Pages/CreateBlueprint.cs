@@ -42,7 +42,7 @@ namespace TheRig.UI.Pages
                 Console.WriteLine("Please provide a unique name for your blueprint.");
                 name = Console.ReadLine();
 
-                if (string.IsNullOrWhiteSpace(name)|| _controller.Player.BlueprintManager.GetBlueprintByName(name) !=null)
+                if (string.IsNullOrWhiteSpace(name)|| _controller.GameManager.GameState.Managers.BlueprintManager.GetBlueprintByName(name) !=null)
                 {
                     Console.WriteLine("Invalid name.");
                 }
@@ -53,10 +53,8 @@ namespace TheRig.UI.Pages
 
             } while (!valid);
 
-            _controller.Player.BlueprintManager.Blueprints.Add(new Blueprint { Name = name});
+            _controller.GameManager.GameState.Managers.BlueprintManager.Blueprints.Add(new Blueprint { Name = name, Owner = _controller.GameManager.GameState.ActivePlayerId});
 
-            GameState.Instance.Player.ActiveComputerName = name;
-            GameState.Instance.Player.ComputerPool.Add(new Computer { Name = name});
 
             Back();
         }

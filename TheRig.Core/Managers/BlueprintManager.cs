@@ -6,8 +6,7 @@ namespace TheRig.Core.Managers
 {
     public class BlueprintManager
     {
-        public List<Blueprint> Blueprints { get; private set; }
-        public Blueprint SelectedBlueprint { get; set; }
+        public List<Blueprint> Blueprints { get; }
 
         public BlueprintManager()
         {
@@ -23,5 +22,9 @@ namespace TheRig.Core.Managers
             Blueprints.Add(blueprint);
         }
 
+        public List<Blueprint> GetPlayersBlueprints(int id)
+        {
+            return Blueprints.Where(x => x.Owner == id).ToList();
+        }
     }
 }

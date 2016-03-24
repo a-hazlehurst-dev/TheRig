@@ -29,10 +29,10 @@ namespace TheRig.UI.Pages.Inventory
         public void View()
         {
 
-            var distinct = _gameController.Player.InventoryManager.Inventory.Distinct();
+            var distinct = _gameController.GameManager.GameState.Managers.InventoryManager.GetPlayersInventory(1).Distinct();
             foreach(var item in distinct)
             {
-                Console.WriteLine(item.Name + ", " + _gameController.Player.InventoryManager.Inventory.Count(x => x.Name == item.Name));
+                Console.WriteLine(item.Name + ", " + _gameController.GameManager.GameState.Managers.InventoryManager.GetPlayersInventory(1).Count(x => x.Name == item.Name));
             }
             Console.WriteLine();
         }

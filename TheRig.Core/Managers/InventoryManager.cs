@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TheRig.Models.Components;
 
 namespace TheRig.Core.Managers
@@ -23,6 +24,11 @@ namespace TheRig.Core.Managers
             {
                 Inventory.Remove(item);
             }
+        }
+
+        public List<Item> GetPlayersInventory(int id)
+        {
+            return Inventory.Where(x => x.Owner == id).ToList();
         }
     }
 }

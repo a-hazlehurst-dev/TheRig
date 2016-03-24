@@ -16,5 +16,6 @@ namespace TheRig.Models.Components
         public string Type { get; set; }
         public decimal Price { get; set; }
         public int ComponentTypeId { get; set; }
+        public int Owner { get; set; }
     }
 }

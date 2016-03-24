@@ -81,11 +81,11 @@ namespace TheRig.UI.Pages.Purchasing
             var val = 0;
             var isValid = false;
             DisplayHelper helper = new DisplayHelper();
-            var item =helper.SelectableList(_gameController.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
+            var item =helper.SelectableList(_gameController.GameManager.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
             do
             {
                 Console.Write("How many would you like to order?");
-                var funds =_gameController.Player.FinanceManager.GetFunds();
+                var funds =_gameController.GameManager.GameState.Managers.FinanceManager.GetFunds(1);
                 var qty =( Math.Round(funds / item.Price, MidpointRounding.AwayFromZero));
                 Console.WriteLine("Max: " + qty);
                 key = Console.ReadLine();
