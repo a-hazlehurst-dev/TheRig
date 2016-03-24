@@ -14,8 +14,8 @@ namespace TheRig.UI.Pages.Menus
         public MarketingMenuPage(GameController gameController)
         {
             _gameController = gameController;
-            _advertisingManager = _gameController.ga.Advertising;
-            _hypeManager = _gameController.Player.HypeManager;
+            _advertisingManager = _gameController.GameManager.GameState.Managers.Advertising;
+            _hypeManager = _gameController.GameManager.GameState.Managers.HypeManager;
         }
 
         public void Draw()

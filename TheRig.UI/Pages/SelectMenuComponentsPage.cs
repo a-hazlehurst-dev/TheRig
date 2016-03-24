@@ -172,7 +172,7 @@ namespace TheRig.UI.Pages
                         repeat = false;
                         if (val > 0 && val <= _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Count())
                         {
-                            _blueprint = _gameController.Player.BlueprintManager.SelectedBlueprint = _gameController.Player.BlueprintManager.Blueprints.ElementAt(val - 1);
+                            _blueprint = _gameController.GameManager.GameState.Players[_gameController.GameManager.GameState.ActivePlayerId].MyActiveBluePrint = _gameController.GameManager.GameState.Managers.BlueprintManager.Blueprints.ElementAt(val - 1);
                         }
                         else
                         {
@@ -198,7 +198,8 @@ namespace TheRig.UI.Pages
 
         private void SelectBlueprint()
         {
-            _blueprint = _gameController.Player.BlueprintManager.SelectedBlueprint;
+            _blueprint =
+                _gameController.GameManager.GameState.Players[_gameController.GameManager.GameState.ActivePlayerId].MyActiveBluePrint;
             if (_blueprint != null)
             {
                 Title();

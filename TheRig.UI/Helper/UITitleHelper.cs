@@ -9,7 +9,7 @@ namespace TheRig.UI.Helper
         public static void TitleBar(GameController gameController)
         {
             Console.Clear();
-            Console.Write(gameController.GameDate.ToString("D"));
+            Console.Write(gameController.GameManager.GameState.GameDateTime.ToString("D"));
             Console.WriteLine("");
         }
         public static void DrawMainTitle(GameController gameController)

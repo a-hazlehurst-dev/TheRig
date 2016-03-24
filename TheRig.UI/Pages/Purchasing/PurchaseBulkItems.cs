@@ -19,7 +19,7 @@ namespace TheRig.UI.Pages.Purchasing
         public void Title()
         {
             Console.Write("Purchase Bulk Items");
-            Console.WriteLine("\t\t\t\t" + _gameController.Player.FinanceManager.GetFunds());
+            Console.WriteLine("\t\t\t\t" + _gameController.GameManager.GameState.Managers.FinanceManager.GetFunds(_gameController.GameManager.GameState.ActivePlayerId));
             Console.WriteLine("---------------------------------");
         }
         
@@ -104,7 +104,7 @@ namespace TheRig.UI.Pages.Purchasing
                 
             } while (!isValid);
 
-            _gameController.Player.PurchasingManager.PurchaseItem(item, val, _gameController.GameDate);
+            _gameController.GameManager.GameState.Managers.PurchasingManager.PurchaseItem(item, val, _gameController.GameManager.GameState.GameDateTime);
 
             Console.ReadKey();
         }

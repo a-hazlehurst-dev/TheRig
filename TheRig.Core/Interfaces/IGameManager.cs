@@ -48,6 +48,7 @@ namespace TheRig.Core.Interfaces
         int ActivePlayerId { get; set; }
         Managers Managers { get; set; }
         List<Player> Players { get; set; }
+        DateTime GameDateTime { get; set; }
         void Initialise();
         void Turn();
     }

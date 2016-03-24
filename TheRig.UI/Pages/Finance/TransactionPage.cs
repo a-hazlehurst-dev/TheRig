@@ -23,7 +23,7 @@ namespace TheRig.UI.Pages.Finance
         {
             Title();
 
-            foreach(var transaction in _gameController.Player.FinanceManager.TransactionManager.Transactions)
+            foreach(var transaction in _gameController.GameManager.GameState.Managers.FinanceManager.TransactionManager.Transactions)
             {
                 Console.WriteLine(transaction.DateCreated.ToString()+", "+ transaction.Name + ", " + transaction.Quantity + ", " + transaction.Value + ".");
             }
