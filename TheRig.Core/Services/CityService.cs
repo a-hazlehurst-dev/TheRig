@@ -1,4 +1,5 @@
-﻿using TheRig.Core.Builders;
+﻿using System.Threading.Tasks;
+using TheRig.Core.Builders;
 using TheRig.Core.Locale;
 using TheRig.Core.Locale.Configurations;
 using TheRig.Core.Locale.Interfaces;
@@ -19,8 +20,8 @@ namespace TheRig.Core.Services
 
         public void BuildNewCity(CityConfiguration cityConfiguration)
         {
-            CityConfiguration = cityConfiguration;
-            City = _cityBuilder.Build(CityConfiguration);
+                CityConfiguration = cityConfiguration;
+                City = _cityBuilder.Build(CityConfiguration);
         }
 
 

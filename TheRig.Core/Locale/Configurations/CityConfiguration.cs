@@ -4,6 +4,14 @@ namespace TheRig.Core.Locale.Configurations
 {
     public class CityConfiguration
     {
+
+        public CityConfiguration(PopulationDensityEnum density, PopulationSizeEnum size, WealthEnum wealth)
+        {
+            PopulationSize = size;
+            PopulationDensity = density;
+            Wealth = wealth;
+        }
+
         public PopulationSizeEnum PopulationSize { get; set; }
         public PopulationDensityEnum PopulationDensity { get; set; }
         public WealthEnum Wealth { get; set; }

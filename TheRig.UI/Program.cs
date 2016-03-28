@@ -1,4 +1,5 @@
 ﻿using TheRig.Core.Configuration;
+using TheRig.Core.Locale.Configurations;
 using TheRig.Core.Services;
 using TheRig.Data;
 using TheRig.Data.Providers;
@@ -12,9 +13,16 @@ namespace ConsoleApplication1
         {
             var dp = new DataProvider();
             var gameData = new UnitOfWork(dp);
-            var preferences = new GamePreferences();
-            
-            var gameManager = new GameManager(gameData, preferences);
+
+            var cityConfiguration = new CityConfiguration(TheRig.Core.Locale.Enums.PopulationDensityEnum.Normal, TheRig.Core.Locale.Enums.PopulationSizeEnum.Medium, TheRig.Core.Locale.Enums.WealthEnum.Average);
+
+            var gameSetup = new GameSetupConfiguration();
+            var gameplaySetup = new GameplayConfiguration(cityConfiguration);
+            var gameConfiguration = new GameConfiguration(gameplaySetup, gameSetup);
+
+            var gameServices = new GameServices();
+
+            var gameManager = new GameManager(gameData, gameConfiguration, gameServices);
 
             var displayController = new GameController(gameManager);
             displayController.Start();

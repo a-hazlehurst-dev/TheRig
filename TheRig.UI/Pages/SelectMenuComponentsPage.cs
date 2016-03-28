@@ -198,8 +198,6 @@ namespace TheRig.UI.Pages
 
         private void SelectBlueprint()
         {
-            _blueprint =
-                _gameController.GameManager.GameState.Players[_gameController.GameManager.GameState.ActivePlayerId].MyActiveBluePrint;
             if (_blueprint != null)
             {
                 Title();

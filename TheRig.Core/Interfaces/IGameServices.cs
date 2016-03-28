@@ -1,4 +1,5 @@
-﻿using TheRig.Core.Services;
+﻿using System.Threading.Tasks;
+using TheRig.Core.Services;
 
 namespace TheRig.Core.Interfaces
 {
@@ -11,6 +12,8 @@ namespace TheRig.Core.Interfaces
         HypeService Hype { get; set; }
         InventoryService Inventory { get; set; }
         PlayerService PlayerService { get; set; }
+
+        void Build(IGameConfiguration config);
     }
 
 }
