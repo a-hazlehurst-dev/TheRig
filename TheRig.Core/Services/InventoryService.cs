@@ -2,13 +2,13 @@
 using System.Linq;
 using TheRig.Models.Components;
 
-namespace TheRig.Core.Managers
+namespace TheRig.Core.Services
 {
-    public class InventoryManager
+    public class InventoryService
     {
         public List<Item> Inventory { get; private set; }
 
-        public InventoryManager()
+        public InventoryService()
         {
             Inventory = new List<Item>();
         }

@@ -2,9 +2,9 @@
 using System.Linq;
 using TheRig.Core.Interfaces;
 
-namespace TheRig.Core.Managers
+namespace TheRig.Core.Services
 {
-    public class HypeManager
+    public class HypeService
     {
         public List<IMeter> Meters { get; set; }
         public List<IMeter> General
@@ -36,7 +36,7 @@ namespace TheRig.Core.Managers
             }
         }
 
-        public HypeManager()
+        public HypeService()
         {
             Meters = new List<IMeter>
             {

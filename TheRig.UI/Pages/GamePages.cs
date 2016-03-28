@@ -19,6 +19,7 @@ namespace TheRig.UI.Pages
         {
             _displayController = displayController;
             Pages = new Dictionary<string, IPage>();
+            Pages.Add("GameMenu", new GameMenuPage(_displayController));
             Pages.Add("MainMenu", new MainMenuPage(_displayController, new MainMenuPageBinding()));
             Pages.Add("Credits", new CreditsPage());
             Pages.Add("AssemblyMenu", new AssemblyMenuPage(_displayController, new AssemblyPageBinding()));
@@ -37,7 +38,7 @@ namespace TheRig.UI.Pages
             Pages.Add("Transactions", new TransactionPage(_displayController));
 
 
-            ActivePage = Pages["MainMenu"];
+            ActivePage = Pages["GameMenu"];
         }
 
     }

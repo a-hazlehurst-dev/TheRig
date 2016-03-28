@@ -2,13 +2,13 @@
 using System.Linq;
 using TheRig.Models;
 
-namespace TheRig.Core.Managers
+namespace TheRig.Core.Services
 {
-    public class BlueprintManager
+    public class BlueprintService
     {
         public List<Blueprint> Blueprints { get; }
 
-        public BlueprintManager()
+        public BlueprintService()
         {
             Blueprints = new List<Blueprint>();
         }

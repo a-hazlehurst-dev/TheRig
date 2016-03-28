@@ -7,7 +7,7 @@ using TheRig.Models.Components;
 
 namespace TheRig.Data
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IGameData
     {
         public IRamRepository RamRepository { get; private set; }
         public ICpuRepository CpuRepository { get; private set; }

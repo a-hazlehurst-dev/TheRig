@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TheRig.Core.Interfaces;
-using TheRig.Models.Components;
+﻿using TheRig.Core.Interfaces;
 
 namespace TheRig.Core.Builders
 {
     public class MotherboardBuilder
     {
-        private IUnitOfWork _unitOfWork;
-        public MotherboardBuilder(IUnitOfWork unitOfWork)
+        private IGameData _gameData;
+        public MotherboardBuilder(IGameData gameData)
         {
-            _unitOfWork = unitOfWork;
+            _gameData = gameData;
         }
-
-      
     }
 }

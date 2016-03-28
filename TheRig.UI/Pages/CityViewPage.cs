@@ -11,7 +11,7 @@ namespace TheRig.UI.Pages
         private City _city;
         public CityViewPage(GameController gameController, IPageBinding pagebinding) : base(gameController, pagebinding)
         {
-            _city = _gameController.GameManager.CityService.City;
+            //_city = _gameController.GameManager.CityService.City;
         }
 
         public override void Title()
@@ -29,27 +29,27 @@ namespace TheRig.UI.Pages
             Console.WriteLine("City Name:\t"+_city.Name);
             Console.WriteLine("Regions");
 
-            foreach (var region in _gameController.GameManager.CityService.City.Regions)
-            {
-                Console.WriteLine("\t--------------------------------------------");
-                Console.WriteLine("\tName: " + region.Name);
-                Console.Write("\tSize: " + region.RegionConfiguration.PopulationSize+"\t");
-                Console.Write("Type: " + region.RegionConfiguration.Type + "\t");
-                Console.WriteLine("Wealth :" + region.RegionConfiguration.Wealth);
-                Console.WriteLine();
+            //foreach (var region in _gameController.GameManager.CityService.City.Regions)
+            //{
+            //    Console.WriteLine("\t--------------------------------------------");
+            //    Console.WriteLine("\tName: " + region.Name);
+            //    Console.Write("\tSize: " + region.RegionConfiguration.PopulationSize+"\t");
+            //    Console.Write("Type: " + region.RegionConfiguration.Type + "\t");
+            //    Console.WriteLine("Wealth :" + region.RegionConfiguration.Wealth);
+            //    Console.WriteLine();
 
-                Console.Write("\tLast Week's Demand\t{ " + region.PreviousWeek.CustomersCreated + " }");
-                Console.Write("\tCustomers:" + region.PreviousWeek.AwareCustomers);
-                Console.WriteLine();
+            //    Console.Write("\tLast Week's Demand\t{ " + region.PreviousWeek.CustomersCreated + " }");
+            //    Console.Write("\tCustomers:" + region.PreviousWeek.AwareCustomers);
+            //    Console.WriteLine();
 
-                Console.Write("\tThis Week's Demand\t{ " + region.ThisWeek.CustomersCreated + " }");
-                Console.Write("\tCustomers:" + region.ThisWeek.AwareCustomers);
-                Console.WriteLine();
+            //    Console.Write("\tThis Week's Demand\t{ " + region.ThisWeek.CustomersCreated + " }");
+            //    Console.Write("\tCustomers:" + region.ThisWeek.AwareCustomers);
+            //    Console.WriteLine();
 
-                Console.Write("\tForecasted Demand\t{ " + region.Forecast.CustomersCreated + " }");
-                Console.Write("\tCustomers:" + region.Forecast.AwareCustomers);
-                Console.WriteLine();
-            }
+            //    Console.Write("\tForecasted Demand\t{ " + region.Forecast.CustomersCreated + " }");
+            //    Console.Write("\tCustomers:" + region.Forecast.AwareCustomers);
+            //    Console.WriteLine();
+            //}
             MenuOptions();
             MenuSelector(Console.ReadLine());
             base.Draw();

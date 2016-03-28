@@ -17,7 +17,7 @@ namespace TheRig.UI.Pages
         public void Title()
         {
             Console.Write("Purchase Supplies");
-            Console.WriteLine("\t\t\t£"+_gameController.GameManager.GameState.Managers.FinanceManager.GetFunds(_gameController.GameManager.GameState.ActivePlayerId).ToString("0.00"));
+            //Console.WriteLine("\t\t\t£"+_gameController.GameManager.GameState.Managers.FinanceManager.GetFunds(_gameController.GameManager.GameState.ActivePlayerId).ToString("0.00"));
             Console.WriteLine("--------------------------------");
             Console.WriteLine();
         }

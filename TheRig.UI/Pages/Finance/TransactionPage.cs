@@ -23,19 +23,19 @@ namespace TheRig.UI.Pages.Finance
         {
             Title();
 
-            foreach(var transaction in _gameController.GameManager.GameState.Managers.FinanceManager.TransactionManager.Transactions)
-            {
-                Console.WriteLine(transaction.DateCreated.ToString()+", "+ transaction.Name + ", " + transaction.Quantity + ", " + transaction.Value + ".");
-            }
+            //foreach(var transaction in _gameController.GameManager.GameState.Managers.FinanceManager.TransactionManager.Transactions)
+            //{
+            //    Console.WriteLine(transaction.DateCreated.ToString()+", "+ transaction.Name + ", " + transaction.Quantity + ", " + transaction.Value + ".");
+            //}
 
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("X: back to finance menu");
+            //Console.WriteLine("----------------------------");
+            //Console.WriteLine("X: back to finance menu");
 
-            var key = Console.ReadLine();
-            if(key.Equals("X")|| key.Equals("x"))
-            {
-                Back();
-            }
+            //var key = Console.ReadLine();
+            //if(key.Equals("X")|| key.Equals("x"))
+            //{
+            //    Back();
+            //}
 
         }
 

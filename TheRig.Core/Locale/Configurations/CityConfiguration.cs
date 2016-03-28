@@ -1,7 +1,4 @@
-﻿
-
-using TheRig.Core.Locale.Enums;
-using TheRig.Core.Managers;
+﻿using TheRig.Core.Locale.Enums;
 
 namespace TheRig.Core.Locale.Configurations
 {

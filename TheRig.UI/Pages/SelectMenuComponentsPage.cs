@@ -113,86 +113,86 @@ namespace TheRig.UI.Pages
         private void SelectCpu()
         {
             DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.CpuRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
-            _blueprint.Computer.Motherboard.CpuSocketArray.Add(item);
+            //var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.CpuRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            //_blueprint.Computer.Motherboard.CpuSocketArray.Add(item);
         }
         private void SelectSound()
         {
-            DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.SoundRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
-            _blueprint.Computer.Motherboard.SoundSocketArray.Add(item);
+            //DisplayHelper helper = new DisplayHelper();
+            //var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.SoundRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            //_blueprint.Computer.Motherboard.SoundSocketArray.Add(item);
         }
 
         private void SelectGraphics()
         {
-            DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.GraphicsRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
-            _blueprint.Computer.Motherboard.GraphicSocketArray.Add(item);
+            //DisplayHelper helper = new DisplayHelper();
+            //var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.GraphicsRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            //_blueprint.Computer.Motherboard.GraphicSocketArray.Add(item);
         }
 
         private void SelectRam()
         {
-            DisplayHelper helper = new DisplayHelper();
-            var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.RamRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
-            _blueprint.Computer.Motherboard.RamSocketArray.Add(item);
+            //DisplayHelper helper = new DisplayHelper();
+            //var item = helper.SelectableList(_gameController.GameManager.UnitOfWork.RamRepository.GetCompatible(_blueprint.Computer.Motherboard).Cast<Item>().ToList());
+            //_blueprint.Computer.Motherboard.RamSocketArray.Add(item);
         }
 
         private void SelectMotherboard()
         {
             if (_blueprint.Computer.Motherboard.Name == "Not set.")
             {
-                Console.WriteLine("You must select a motherboard first.");
-                DisplayHelper helper = new DisplayHelper();
-                var item =helper.SelectableList(_gameController.GameManager.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
-                _blueprint.Computer.Motherboard = (Motherboard)item;
+                //Console.WriteLine("You must select a motherboard first.");
+                //DisplayHelper helper = new DisplayHelper();
+                //var item =helper.SelectableList(_gameController.GameManager.UnitOfWork.MotherboardRepository.Find().Cast<Item>().ToList());
+                //_blueprint.Computer.Motherboard = (Motherboard)item;
             }
             
         }
 
         private void DisplayAndSelectBlueprint()
         {
-            if (_gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Any())
-            {
-                bool repeat = true;
-                do
-                {
-                    Title();
+        //    if (_gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Any())
+        //    {
+        //        bool repeat = true;
+        //        do
+        //        {
+        //            Title();
 
-                    Console.WriteLine("please select a blue print.");
-                    var count = 1;
-                    foreach (var bp in _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1))
-                    {
-                        Console.WriteLine(count + ", " + bp.Name);
-                        count++;
-                    }
-                    var selectedVal = Console.ReadLine();
-                    var val = 0;
-                    if (int.TryParse(selectedVal, out val))
-                    {
-                        repeat = false;
-                        if (val > 0 && val <= _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Count())
-                        {
-                            _blueprint = _gameController.GameManager.GameState.Players[_gameController.GameManager.GameState.ActivePlayerId].MyActiveBluePrint = _gameController.GameManager.GameState.Managers.BlueprintManager.Blueprints.ElementAt(val - 1);
-                        }
-                        else
-                        {
-                            repeat = true;
-                            Console.WriteLine("Invalid input");
-                            Console.ReadKey();
-                        }
-                    }
-                    else
-                    {
-                        repeat = true;
-                        Console.WriteLine("Invalid input");
-                        Console.ReadKey();
-                    }
-                } while (repeat);
-            }
-            else
-            {
-                Console.WriteLine("You have no blueprints, you must build one first.");
-            }
+        //            Console.WriteLine("please select a blue print.");
+        //            var count = 1;
+        //            foreach (var bp in _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1))
+        //            {
+        //                Console.WriteLine(count + ", " + bp.Name);
+        //                count++;
+        //            }
+        //            var selectedVal = Console.ReadLine();
+        //            var val = 0;
+        //            if (int.TryParse(selectedVal, out val))
+        //            {
+        //                repeat = false;
+        //                if (val > 0 && val <= _gameController.GameManager.GameState.Managers.BlueprintManager.GetPlayersBlueprints(1).Count())
+        //                {
+        //                    _blueprint = _gameController.GameManager.GameState.Players[_gameController.GameManager.GameState.ActivePlayerId].MyActiveBluePrint = _gameController.GameManager.GameState.Managers.BlueprintManager.Blueprints.ElementAt(val - 1);
+        //                }
+        //                else
+        //                {
+        //                    repeat = true;
+        //                    Console.WriteLine("Invalid input");
+        //                    Console.ReadKey();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                repeat = true;
+        //                Console.WriteLine("Invalid input");
+        //                Console.ReadKey();
+        //            }
+        //        } while (repeat);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("You have no blueprints, you must build one first.");
+        //    }
         
         }
 

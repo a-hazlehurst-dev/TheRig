@@ -4,8 +4,10 @@ using TheRig.Models.Components;
 
 namespace TheRig.Core.Interfaces
 {
-    public interface  IUnitOfWork
+    public interface  IGameData
     {
+
+
         IMotherboardRepository MotherboardRepository { get; }
         ICpuRepository CpuRepository { get;  }
         IRamRepository RamRepository { get; }

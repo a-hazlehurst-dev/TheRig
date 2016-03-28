@@ -52,6 +52,7 @@
     <Compile Include="Pages\IPageBuilder.cs" />
     <Compile Include="Pages\Menus\CityMenuPage.cs" />
     <Compile Include="Pages\Menus\FinanceMenuPage.cs" />
+    <Compile Include="Pages\Menus\GameMenuPage.cs" />
     <Compile Include="Pages\Menus\InventoryMenuPage.cs" />
     <Compile Include="Pages\Menus\AssemblyMenuPage.cs" />
     <Compile Include="Pages\Menus\MarketingMenuPage.cs" />

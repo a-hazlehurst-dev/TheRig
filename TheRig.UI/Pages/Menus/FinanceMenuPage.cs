@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using TheRig.UI.Controller;
 using TheRig.UI.Pages.Interfaces;
 using TheRig.UI.Pages.Menus.Interfaces;

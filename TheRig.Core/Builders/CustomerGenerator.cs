@@ -27,48 +27,48 @@ namespace TheRig.Core.Builders
 
         private void ApplyAwarenessFilter(Region region)
         {
-            var meter = region.RegionalHypeManager.General.SingleOrDefault(x => x.Name == "Awareness");
-            var step = meter.Max / 10;
-            if (meter.Current >= step * 0 && meter.Current < step * 1)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(0, 12, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 1 && meter.Current < step * 2)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(8, 22, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 2 && meter.Current < step * 3)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(18, 32, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 3 && meter.Current < step * 4)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(28, 42, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 4 && meter.Current < step * 5)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(38, 52, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 5 && meter.Current < step * 6)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(48, 62, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 6 && meter.Current < step * 7)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(58, 72, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 7 && meter.Current < step * 8)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(68, 82, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 8 && meter.Current < step * 9)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(78, 92, region.Forecast.CustomersCreated);
-            }
-            else if (meter.Current >= step * 9 && meter.Current < step * 10)
-            {
-                region.Forecast.AwareCustomers = CalculateAwareness(88, 100, region.Forecast.CustomersCreated);
-            }
+            //var meter = region.RegionalHypeManager.General.SingleOrDefault(x => x.Name == "Awareness");
+            //var step = meter.Max / 10;
+            //if (meter.Current >= step * 0 && meter.Current < step * 1)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(0, 12, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 1 && meter.Current < step * 2)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(8, 22, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 2 && meter.Current < step * 3)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(18, 32, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 3 && meter.Current < step * 4)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(28, 42, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 4 && meter.Current < step * 5)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(38, 52, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 5 && meter.Current < step * 6)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(48, 62, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 6 && meter.Current < step * 7)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(58, 72, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 7 && meter.Current < step * 8)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(68, 82, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 8 && meter.Current < step * 9)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(78, 92, region.Forecast.CustomersCreated);
+            //}
+            //else if (meter.Current >= step * 9 && meter.Current < step * 10)
+            //{
+            //    region.Forecast.AwareCustomers = CalculateAwareness(88, 100, region.Forecast.CustomersCreated);
+            //}
         }
 
         public int CalculateAwareness(int min, int max, int customers)

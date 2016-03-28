@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using TheRig.Models;
 
-namespace TheRig.Core.Managers
+namespace TheRig.Core.Services
 {
-    public class CustomerManager
+    public class CustomerService
     {
         private Random _random;
         public List<Customer> ActiveCustomers { get; set; }
         public List<Customer> HistoricalCustomers { get; set; }
 
-        private readonly HypeManager _hypeManager;
-        public CustomerManager(HypeManager hypeManager)
+        public CustomerService()
         {
-            _hypeManager = hypeManager;
             _random = new Random();
         }
 

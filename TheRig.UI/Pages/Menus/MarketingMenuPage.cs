@@ -1,5 +1,4 @@
 ﻿using System;
-using TheRig.Core.Managers;
 using TheRig.UI.Controller;
 using TheRig.UI.Pages.Interfaces;
 
@@ -8,14 +7,10 @@ namespace TheRig.UI.Pages.Menus
     public class MarketingMenuPage : IPage
     {
         private readonly GameController _gameController;
-        private readonly AdvertisingManager _advertisingManager;
-        private readonly HypeManager _hypeManager;
 
         public MarketingMenuPage(GameController gameController)
         {
             _gameController = gameController;
-            _advertisingManager = _gameController.GameManager.GameState.Managers.Advertising;
-            _hypeManager = _gameController.GameManager.GameState.Managers.HypeManager;
         }
 
         public void Draw()
