@@ -13,7 +13,6 @@ namespace TheRig.Core.Interfaces
         InventoryService Inventory { get; set; }
         PlayerService PlayerService { get; set; }
 
-        void Build(IGameConfiguration config);
+        void Build(IGameConfiguration config, IGameData gameData);
     }
-
 }

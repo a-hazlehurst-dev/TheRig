@@ -5,7 +5,7 @@ namespace TheRig.Core.Interfaces.Repositories
 {
     public interface IGraphicRepository
     {
-        Graphic GetGraphic(int id);
+        Graphic GetGraphic(string id);
         IEnumerable<Graphic> Find();
         IEnumerable<Graphic> GetCompatible(Motherboard motherboard);
     }

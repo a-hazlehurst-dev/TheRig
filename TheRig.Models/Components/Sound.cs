@@ -1,11 +1,12 @@
-﻿namespace TheRig.Models.Components
+﻿using System;
+
+namespace TheRig.Models.Components
 {
     public class Sound : Item
     {
         public Sound()
         {
-            Type = "Sound";
-            ComponentTypeId = 4;
+            ComponentType = ComponentTypeEnum.Sound;
         }
     }
 }

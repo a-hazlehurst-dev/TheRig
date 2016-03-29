@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\Configuration\IGameConfiguration.cs" />
     <Compile Include="Interfaces\IGameManager.cs" />
     <Compile Include="Interfaces\IGameServices.cs" />
+    <Compile Include="Interfaces\Repositories\IManufacturerRepository.cs" />
     <Compile Include="Locale\Builders\CityBuilder.cs" />
     <Compile Include="Locale\Builders\RegionBuilder.cs" />
     <Compile Include="Locale\Configurations\CityConfiguration.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Locale\Interfaces\ICityBuilder.cs" />
     <Compile Include="Locale\City.cs" />
     <Compile Include="Locale\Region.cs" />
+    <Compile Include="Services\GameManager.cs" />
     <Compile Include="Services\MarketingService.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
     <Compile Include="Services\BlueprintService.cs" />
@@ -74,7 +76,6 @@
     <Compile Include="Services\GameServices.cs" />
     <Compile Include="Services\HypeService.cs" />
     <Compile Include="Meter.cs" />
-    <Compile Include="Services\GameManager.cs" />
     <Compile Include="GlobalState.cs" />
     <Compile Include="Interfaces\IDataProvider.cs" />
     <Compile Include="Interfaces\IMeter.cs" />

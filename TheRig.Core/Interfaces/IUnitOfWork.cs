@@ -1,21 +1,9 @@
-﻿using System.Collections.Generic;
-using TheRig.Core.Interfaces.Repositories;
-using TheRig.Models.Components;
+﻿using TheRig.Core.Interfaces.Repositories;
 
 namespace TheRig.Core.Interfaces
 {
-    public interface  IGameData
+    public interface IGameData
     {
-
-
-        IMotherboardRepository MotherboardRepository { get; }
-        ICpuRepository CpuRepository { get;  }
-        IRamRepository RamRepository { get; }
-        ISoundRepository SoundRepository { get;  }
-        IGraphicRepository GraphicsRepository { get; }
-        
-
-        List<Item> GetAll();
-        List<Item> GetCompatibleItems(Motherboard motherboard);
+        IManufacturerRepository ManufacturerRepository { get; }
     }
 }

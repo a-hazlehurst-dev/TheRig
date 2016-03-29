@@ -12,8 +12,7 @@ namespace TheRig.Models.Components
         public int Capacity { get; set; }
         public Graphic()
         {
-            Type = "Graphic";
-            ComponentTypeId = 3;
+            ComponentType = ComponentTypeEnum.Graphics;
         }
     }
 }

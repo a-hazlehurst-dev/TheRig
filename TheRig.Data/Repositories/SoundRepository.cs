@@ -14,7 +14,7 @@ namespace TheRig.Data.Repositories
             _context = context;
         }
 
-        public Sound GetSound(int id)
+        public Sound GetSound(string id)
         {
             return _context.SingleOrDefault(x => x.Id == id);
         }

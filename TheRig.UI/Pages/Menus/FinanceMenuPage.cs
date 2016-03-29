@@ -22,6 +22,7 @@ namespace TheRig.UI.Pages.Menus
         public void Draw()
         {
             Title();
+            Console.WriteLine("Current Balance: £" + _gameController.GameManager.GameServices.Finance.GetFunds(1));
             MenuOptions();
             MenuSelector(Console.ReadLine());
         }

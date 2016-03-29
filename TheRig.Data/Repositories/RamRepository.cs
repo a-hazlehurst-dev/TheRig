@@ -13,7 +13,7 @@ namespace TheRig.Data.Repositories
             _items = context;
         }
 
-        public Ram GetItem(int id)
+        public Ram GetItem(string id)
         {
             return _items.SingleOrDefault(x => x.Id == id);
         }

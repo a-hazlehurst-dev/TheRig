@@ -27,12 +27,10 @@ namespace TheRig.UI.Pages.Menus
 
         public override void MenuOptions()
         {
-            Console.WriteLine("A:\tBlueprints");
-            Console.WriteLine("B:\tMarketing");
-            Console.WriteLine("C:\tPurchasing");
-            Console.WriteLine("D:\tInventory");
-            Console.WriteLine("E\tFinance");
-            Console.WriteLine("F\tCity View");
+            
+            Console.WriteLine("A:\tFinance");
+            Console.WriteLine("B:\tCity View");
+            Console.WriteLine("C:\tSupply");
             Console.WriteLine();
             Console.WriteLine("Z:\tNext Turn.");
             base.MenuOptions();

@@ -5,7 +5,7 @@ namespace TheRig.Core.Interfaces.Repositories
 {
     public interface ICpuRepository
     {
-        Cpu Get(int id);
+        Cpu Get(string id);
         IEnumerable<Cpu> Find();
         IEnumerable<Cpu> GetCompatible(Motherboard motherboard);
     }

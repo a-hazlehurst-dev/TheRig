@@ -1,69 +1,155 @@
 ﻿using System.Collections.Generic;
 using TheRig.Core.Interfaces;
+using TheRig.Models;
 using TheRig.Models.Components;
 
 namespace TheRig.Data.Providers
 {
     public class DataProvider : IDataProvider
     {
-        public List<Motherboard> GetMotherboards()
+        private List<ItemStock> VisageStock()
         {
-            return new List<Motherboard>
+            return new List<ItemStock>
             {
-                new Motherboard(2, 1, 1, 1) {Id =1, RamTypeId = 1, Name = "Mobo1", CpuTypeId = 1, GraphicsTypeId = 1, SoundTypeId = 1, Price = 50.0m},
-                new Motherboard(2, 1, 1, 1) {Id= 2, RamTypeId = 2,Name = "Mobo2", CpuTypeId = 2, GraphicsTypeId = 2, SoundTypeId = 1, Price = 75.0m },
-                new Motherboard(4,1,1,1) {Id= 3, RamTypeId = 2,Name = "Mobo3", CpuTypeId = 2, GraphicsTypeId = 3, SoundTypeId = 1 ,Price = 99.0m }
-            };
-        }
-        public List<Ram> GetRam()
-        {
-            return new List<Ram>
-            {
-                new Ram {Id = 1, TypeId = 1, Name = "Ram1", Speed = 1, Capacity = 5, Price = 50.0M},
-                new Ram {Id = 2, TypeId = 1, Name = "Ram2", Speed = 1, Capacity = 8, Price = 70.0M},
-                new Ram {Id = 3, TypeId = 2, Name = "Ram3", Speed = 2, Capacity = 5, Price = 60.0M},
-                new Ram {Id = 4, TypeId = 2, Name = "Ram4", Speed = 2, Capacity = 8, Price = 75.0M},
-                new Ram {Id = 5, TypeId = 2, Name = "Ram5", Speed = 2, Capacity = 10, Price = 90.0M},
-                new Ram {Id = 6, TypeId = 2, Name = "Ram6", Speed = 2, Capacity = 12,  Price = 120.0M}
-            };
-        }
-        public List<Cpu> GetCpus()
-        {
-            return new List<Cpu>
-            {
-                new Cpu {Id = 1, TypeId = 1, Name = "Cpu1", Speed = 1, Price = 98.00M},
-                new Cpu {Id = 2, TypeId = 1, Name = "Cpu2", Speed = 1, Price = 79.00M},
-                new Cpu {Id = 3, TypeId = 1, Name = "Cpu3", Speed = 2, Price = 140.00M},
-                new Cpu {Id = 4, TypeId = 1, Name = "Cpu5", Speed = 2, Price = 152.00M},
-                new Cpu {Id = 5, TypeId = 2, Name = "Cpu6", Speed = 2, Price = 132.00M},
-                new Cpu {Id = 6, TypeId = 2, Name = "Cpu7", Speed = 3, Price = 211.00M}
-            };
+                new ItemStock
+                {
+                    Item = new Motherboard(2, 1, 1, 1) { Id ="MB-01", RamTypeId = 1, Name = "Fade", CpuTypeId = 1, GraphicsTypeId = 1, SoundTypeId = 1, Price = 50.0m},
+                    StockCount = 100,
+                    SellPrice = 79.99M
+                },
+                new ItemStock
+                {
+                    Item = new Ram {Id = "RM-01", TypeId = 1, Name = "Grayso", Speed = 1, Capacity = 5, Price = 50.0M},
+                    StockCount = 100,
+                    SellPrice = 75.00M
+                },
+                new ItemStock
+                {
+                    Item = new Graphic {Id = "GR-01", Name = "Fog",  TypeId = 1 , Speed = 1, Price = 100.00M},
+                    StockCount = 100,
+                    SellPrice = 125M
+                },
+                new ItemStock
+                {
+                      Item = new Cpu {Id = "CP-01", TypeId = 1, Name = "Mirage", Speed = 1, Price = 98.00M},
+                      StockCount = 100,
+                      SellPrice = 125M
+                },
+                new ItemStock
+                {
+                      Item = new Sound {Id = "SO-01", Name = "Tinge",  TypeId = 1, Price = 12.99M},
+                      StockCount = 100,
+                      SellPrice = 19.99M
+                }
 
-        }
-        public List<Graphic> GetGraphics()
-        {
-            return new List<Graphic>
-            {
-                new Graphic {Id = 1, Name = "Graphic1", TileGridId = 1, TypeId = 1 , Speed = 1, Price = 100.00M},
-                new Graphic {Id = 2, Name = "Graphic2", TileGridId = 1, TypeId = 1, Speed = 2, Price = 120.00M},
-                new Graphic {Id = 3, Name = "Graphic3", TileGridId = 2, TypeId = 2, Speed = 2, Price = 132.00M},
-                new Graphic {Id = 4, Name = "Graphic4", TileGridId = 2, TypeId = 2, Speed = 3, Price = 175.00M},
-                new Graphic {Id = 5, Name = "Graphic5", TileGridId = 2, TypeId = 2, Speed = 4, Price = 250.00M},
-                new Graphic {Id = 6, Name = "Graphic6", TileGridId = 3, TypeId = 3, Speed = 4, Price = 239.00M},
-                new Graphic {Id = 7, Name = "Graphic7", TileGridId = 3, TypeId = 3, Speed = 5, Price = 310.00M},
+
             };
         }
-        public List<Sound> GetSounds()
+
+        private List<ItemStock> LizardStock()
         {
-            return new List<Sound>
+            return new List<ItemStock>
             {
-                new Sound {Id = 1, Name = "Sound1", TileGridId = 1, TypeId = 1, Price = 12.99M},
-                new Sound {Id = 2, Name = "Sound2", TileGridId = 1, TypeId = 1, Price = 15.99M},
-                new Sound {Id = 3, Name = "Sound3", TileGridId = 2, TypeId = 2, Price = 19.99M},
-                new Sound {Id = 4, Name = "Sound4", TileGridId = 3, TypeId = 3, Price = 25.99M},
-                new Sound {Id = 5, Name = "Sound5", TileGridId = 2, TypeId = 2, Price = 27.99M},
-                new Sound {Id = 6, Name = "Sound6", TileGridId = 3, TypeId = 3, Price = 32.99M},
-                new Sound {Id = 7, Name = "Sound7", TileGridId = 3, TypeId = 3, Price = 45.99M}
+                new ItemStock
+                {
+                    Item = new Ram {Id = "RM-02", TypeId = 1, Name = "Iguana", Speed = 1, Capacity = 8, Price = 70.0M},
+                    StockCount = 100,
+                    SellPrice = 99M
+                },
+                new ItemStock
+                {
+                    Item = new Ram {Id = "RM-03", TypeId = 1, Name = "Dragon", Speed = 1, Capacity = 10, Price = 75.0M},
+                    StockCount = 100,
+                    SellPrice = 105M
+                },
+                new ItemStock
+                {
+                    Item = new Ram {Id = "RM-04", TypeId = 2, Name = "Gecko", Speed = 2, Capacity = 8, Price = 100.0M},
+                    StockCount = 100,
+                    SellPrice = 130M
+                }
+            };
+        }
+
+        private List<ItemStock> RockStock()
+        {
+            return new List<ItemStock>
+            {
+                new ItemStock
+                {
+                    Item = new Cpu {Id = "CP-02", TypeId = 1, Name = "Lime", Speed = 1, Price = 98.00M},
+                    SellPrice = 125M,
+                    StockCount = 100
+                },
+                new ItemStock
+                {
+                    Item = new Cpu {Id = "CP-03", TypeId = 1, Name = "Igneus", Speed = 2, Price = 130.00M},
+                    SellPrice = 160M,
+                    StockCount = 100,
+                },
+                new ItemStock
+                {
+                    Item = new Cpu {Id = "CP-04", TypeId = 1, Name = "Salt", Speed = 2, Price = 199.00M},
+                    SellPrice = 250M,
+                    StockCount = 100,
+                }
+            };
+        }
+
+        private List<ItemStock> DewsburyStock()
+        {
+            return new List<ItemStock>
+            {
+                new ItemStock
+                {
+                    Item =new Graphic {Id = "GR-02", Name = "Leeds",  TypeId = 1 , Speed = 1, Price = 100.00M},
+                    SellPrice = 125M,
+                    StockCount = 100
+                },
+                new ItemStock
+                {
+                    Item = new Graphic {Id = "GR-03", Name = "London",  TypeId = 1, Speed = 2, Price = 125.00M},
+                    SellPrice = 150M,
+                    StockCount = 100
+                },
+                new ItemStock
+                {
+                    Item = new Graphic { Id ="GR-04", Name ="Chester",  TypeId =2, Speed = 3, Price = 170.00M},
+                     SellPrice = 199.99M,
+                    StockCount = 100
+                }
+
+            };
+        }
+
+        private List<ItemStock> BandStock()
+        {
+            return new List<ItemStock>
+            {
+                new ItemStock
+                {
+                    Item =new Sound {Id = "SO-01", Name = "Tune",  TypeId = 1, Price = 12.99M},
+                    SellPrice = 16.99M,
+                    StockCount = 100,
+                },
+                new ItemStock
+                {
+                    Item = new Sound {Id = "SO-02", Name = "Ballad",  TypeId = 3, Price = 25.99M},
+                    SellPrice = 35M,
+                    StockCount = 100
+                }
+            };
+        }
+
+        public List<Manufacturer> GetManufacturers()
+        {
+            return new List<Manufacturer>
+            {
+                new Manufacturer { Id="M-01", Name = "Visaage", Stock = VisageStock() },
+                new Manufacturer { Id="M-02", Name = "Lizard", Stock = LizardStock()},
+                new Manufacturer { Id="M-03", Name = "Rock", Stock = RockStock() },
+                new Manufacturer { Id="M-04", Name = "Dewsbury", Stock = DewsburyStock()  },
+                new Manufacturer { Id ="M-05", Name = "Band", Stock = BandStock()}
             };
         }
     }

@@ -26,6 +26,7 @@ namespace TheRig.UI.Pages
         {
             Title();
             Console.WriteLine("City Information");
+
             Console.WriteLine("City Name:\t"+_city.Name);
             Console.WriteLine("Regions");
 

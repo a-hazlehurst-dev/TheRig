@@ -14,7 +14,7 @@ namespace TheRig.Data.Repositories
             _context = context;
         }
 
-        public Motherboard GetMotherboard(int id)
+        public Motherboard GetMotherboard(string id)
         {
             return _context.SingleOrDefault(x => x.Id == id);
         }

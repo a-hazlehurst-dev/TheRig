@@ -11,8 +11,7 @@ namespace TheRig.Models.Components
         public int Speed { get; set; }
         public Cpu()
         {
-            Type = "Cpu";
-            ComponentTypeId = 1;
+            ComponentType  = ComponentTypeEnum.Cpu;
         }
     }
 }

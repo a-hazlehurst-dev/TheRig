@@ -9,13 +9,21 @@ namespace TheRig.Models.Components
 {
     public class Item
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int TypeId { get; set; }
-        public int TileGridId { get; set; }
-        public string Type { get; set; }
         public decimal Price { get; set; }
-        public int ComponentTypeId { get; set; }
+        public ComponentTypeEnum ComponentType { get; set; }
         public int Owner { get; set; }
+    }
+
+
+    public enum ComponentTypeEnum
+    {
+        Motherboard = 1,
+        Ram = 2,
+        Cpu = 3,
+        Graphics = 4,
+        Sound = 5
     }
 }

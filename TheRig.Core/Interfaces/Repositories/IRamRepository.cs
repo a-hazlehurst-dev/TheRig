@@ -5,7 +5,7 @@ namespace TheRig.Core.Interfaces.Repositories
 {
     public interface IRamRepository
     {
-        Ram GetItem(int id);
+        Ram GetItem(string id);
         IEnumerable<Ram> GetCompatible(Motherboard motherboard);
         IEnumerable<Ram> Find();
     }

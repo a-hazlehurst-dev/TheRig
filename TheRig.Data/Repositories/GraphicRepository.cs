@@ -14,7 +14,7 @@ namespace TheRig.Data.Repositories
             _context = context;
         }
 
-        public Graphic GetGraphic(int id)
+        public Graphic GetGraphic(string id)
         {
             return _context.SingleOrDefault(x => x.Id == id);
         }

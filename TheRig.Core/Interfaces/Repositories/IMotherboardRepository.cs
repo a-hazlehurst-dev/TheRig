@@ -5,7 +5,7 @@ namespace TheRig.Core.Interfaces.Repositories
 {
     public interface  IMotherboardRepository
     {
-        Motherboard GetMotherboard(int id);
+        Motherboard GetMotherboard(string id);
         IEnumerable<Motherboard> Find();
     }
 }

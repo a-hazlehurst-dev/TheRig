@@ -26,9 +26,10 @@ namespace TheRig.Core.Services
             PlayerService = new PlayerService();
         }
 
-        public void Build(IGameConfiguration config)
+        public void Build(IGameConfiguration config, IGameData gameData)
         {
             City.BuildNewCity(config.GameplayConfiguration.CityConfiguration);
+            Finance.Build(config.GameplayConfiguration);
         }
     }
 }

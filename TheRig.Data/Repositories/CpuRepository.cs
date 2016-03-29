@@ -14,7 +14,7 @@ namespace TheRig.Data.Repositories
             _context = context;
         }
 
-        public Cpu Get(int id)
+        public Cpu Get(string id)
         {
             return _context.SingleOrDefault(x => x.Id == id);
         }

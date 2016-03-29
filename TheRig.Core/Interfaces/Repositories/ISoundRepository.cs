@@ -5,7 +5,7 @@ namespace TheRig.Core.Interfaces.Repositories
 {
     public interface ISoundRepository
     {
-        Sound GetSound(int id);
+        Sound GetSound(string id);
         IEnumerable<Sound> Find();
         IEnumerable<Sound> GetCompatible(Motherboard motherboard);
     }
