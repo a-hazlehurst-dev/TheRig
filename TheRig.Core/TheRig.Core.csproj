@@ -67,6 +67,7 @@
     <Compile Include="Locale\Interfaces\ICityBuilder.cs" />
     <Compile Include="Locale\City.cs" />
     <Compile Include="Locale\Region.cs" />
+    <Compile Include="SalesMechanic.cs" />
     <Compile Include="Services\GameManager.cs" />
     <Compile Include="Services\MarketingService.cs" />
     <Compile Include="Builders\MotherboardBuilder.cs" />
